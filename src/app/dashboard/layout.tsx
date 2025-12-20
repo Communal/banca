@@ -1,5 +1,6 @@
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { MobileHeader } from "@/components/dashboard/MobileHeader";
+import Image from "next/image";
 
 export default function DashboardLayout({
   children,
@@ -20,7 +21,12 @@ export default function DashboardLayout({
           <div className="flex items-center gap-4">
             {/* Search Bar & Profile Pic would go here */}
             <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
-              <img src="/avatars/user.jpg" alt="Profile" />
+              <Image
+                src="/avatars/user.jpg"
+                alt="Profile"
+                width={40}
+                height={40}
+              />
             </div>
           </div>
         </header>

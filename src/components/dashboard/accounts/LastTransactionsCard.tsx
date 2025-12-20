@@ -1,4 +1,4 @@
-import { Settings, User, RefreshCw } from "lucide-react";
+import { Settings, User, RefreshCw, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const formatDate = (dateString: string) => {

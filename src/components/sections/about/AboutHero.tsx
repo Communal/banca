@@ -41,10 +41,11 @@ const AboutHero = () => {
           {/* Placeholder Image - Grayscale Effect applied via style or class */}
           <div className="absolute inset-0 bg-gray-300">
             {/* Replace with <Image /> component */}
-            <img
+            <Image
               src="/images/Image.png"
               alt="YourBank Team"
-              className="w-full h-full object-cover filter grayscale"
+              fill
+              className="object-cover filter grayscale"
             />
           </div>
         </div>

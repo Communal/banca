@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const MissionSection = () => {
   return (
     <section className="py-20 container mx-auto px-4">
@@ -47,10 +49,11 @@ const MissionSection = () => {
 
             {/* The Image Box - Unique Shape: Top-Left & Bottom-Right Rounded */}
             <div className="relative bg-gray-200 aspect-[4/3] rounded-tl-[3rem] rounded-br-[3rem] rounded-tr-lg rounded-bl-lg overflow-hidden shadow-sm z-10">
-              <img
+              <Image
                 src="/images/Image-1.png"
                 alt="Our Mission"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
             </div>
           </div>
@@ -104,10 +107,11 @@ const MissionSection = () => {
 
             {/* The Image Box - Unique Shape: Top-Right & Bottom-Left Rounded (Opposite of Mission) */}
             <div className="relative bg-gray-200 aspect-[4/3] rounded-tr-[3rem] rounded-bl-[3rem] rounded-tl-lg rounded-br-lg overflow-hidden shadow-sm z-10">
-              <img
+              <Image
                 src="/images/Image-2.png"
                 alt="Our Vision"
-                className="w-full h-full object-cover"
+                fill
+                className="object-cover"
               />
             </div>
           </div>

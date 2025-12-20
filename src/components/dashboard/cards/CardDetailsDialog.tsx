@@ -6,6 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useCardDetails } from "@/hooks/useCards";
+import Image from "next/image";
 
 interface CardDetailsDialogProps {
   cardId: string | null;
@@ -34,16 +35,18 @@ export const CardDetailsDialog = ({
         ) : card ? (
           <div className="space-y-6">
             {/* Visual Representation */}
-            <div className="bg-gradient-to-r from-[#2D60FF] to-[#539BFF] p-6 rounded-2xl text-white shadow-lg">
+            <div className="bg-linear-to-r from-[#2D60FF] to-[#539BFF] p-6 rounded-2xl text-white shadow-lg">
               <div className="flex justify-between items-start mb-8">
                 <div>
                   <p className="text-xs opacity-80">Balance</p>
                   <p className="text-xl font-semibold">${card.balance}</p>
                 </div>
-                <img
+                <Image
                   src="/icons/chip-card.png"
                   alt="Chip"
-                  className="w-8 h-8 opacity-80"
+                  width={32}
+                  height={32}
+                  className="opacity-80"
                 />
               </div>
               <div className="flex justify-between items-end">

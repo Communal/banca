@@ -15,10 +15,11 @@ const SecurityHero = () => {
         */}
         <div className="order-1 w-full h-[300px] md:absolute md:top-0 md:right-0 md:w-[50%] md:h-full md:order-none z-0">
           <div className="w-full h-full relative">
-            <img
+            <Image
               src="/images/Image57.png"
               alt="Security Priority"
-              className="w-full h-full object-cover object-center"
+              fill
+              className="object-cover object-center"
             />
           </div>
         </div>

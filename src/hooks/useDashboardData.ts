@@ -9,14 +9,23 @@ export interface Transaction {
     amount: number;
 }
 
-// NEW: Added Balance History type
 export interface BalancePoint {
     month: string;
     balance: number;
 }
 
+export interface ExpenseStat {
+    name: string;
+    value: number;
+    color: string;
+}
+
 // --- Mock API Call ---
 const fetchDashboardData = async () => {
+    // In a real app, this would be: 
+    // const res = await fetch('/api/dashboard/overview');
+    // return res.json();
+
     await new Promise(resolve => setTimeout(resolve, 500));
 
     return {
@@ -40,7 +49,6 @@ const fetchDashboardData = async () => {
             { id: '2', type: 'paypal', title: 'Deposit Paypal', date: '25 January 2021', amount: 2500 },
             { id: '3', type: 'transfer', title: 'Jemi Wilson', date: '21 January 2021', amount: 5400 },
         ] as Transaction[],
-        // NEW: Added Balance History mock data
         balanceHistory: [
             { month: 'Jul', balance: 120 },
             { month: 'Aug', balance: 300 },
@@ -59,4 +67,13 @@ export const useDashboardData = () => {
         queryFn: fetchDashboardData,
         staleTime: 1000 * 60 * 5,
     });
+};
+
+export const useExpenseStats = () => {
+    // We reuse the main data hook to ensure we don't over-fetch
+    const { data, ...rest } = useDashboardData();
+    return {
+        data: data?.expenseStats,
+        ...rest
+    };
 };
