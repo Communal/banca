@@ -8,6 +8,7 @@ import {
   Layers,
   PiggyBank,
 } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 // --- Types ---
@@ -31,14 +32,18 @@ type UseCaseRowProps = {
 
 // --- Sub-Component: Individual Feature Box ---
 const FeatureBox = ({ icon: Icon, title }: FeatureCard) => (
-  <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center gap-4 aspect-square">
-    <div className="w-12 h-12 rounded-full bg-brand-light flex items-center justify-center text-brand-accent">
-      <Icon size={24} />
+  <div className="bg-white h-full w-full p-3 md:p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col items-center justify-center text-center gap-2 md:gap-4">
+    {/* Icon Container: Smaller on mobile (w-10) to save space */}
+    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-brand-light flex items-center justify-center text-brand-accent shrink-0">
+      <Icon className="w-5 h-5 md:w-6 md:h-6" />
     </div>
-    <span className="font-medium text-brand-primary">{title}</span>
+
+    {/* Title: Smaller text on mobile to prevent overflow */}
+    <span className="font-medium text-xs md:text-base text-brand-primary leading-tight">
+      {title}
+    </span>
   </div>
 );
-
 // --- Sub-Component: The Row (Text + Grid) ---
 const UseCaseRow = ({
   title,
@@ -49,9 +54,8 @@ const UseCaseRow = ({
 }: UseCaseRowProps) => {
   return (
     <div
-      className={`flex flex-col gap-12 lg:gap-20 items-center ${
-        reversed ? "lg:flex-row-reverse" : "lg:flex-row"
-      }`}
+      className={`flex flex-col gap-12 lg:gap-20 items-center ${reversed ? "lg:flex-row-reverse" : "lg:flex-row"
+        }`}
     >
       {/* 1. The Grid of Cards (Visual) */}
       <div className="flex-1 w-full relative">
@@ -83,7 +87,17 @@ const UseCaseRow = ({
         {/* The Grid itself */}
         <div className="grid grid-cols-2 gap-4 bg-gray-100/50 p-4 rounded-3xl">
           {features.map((feature, idx) => (
-            <FeatureBox key={idx} {...feature} />
+            // FIX APPLIED HERE:
+            // 1. aspect-square: Forces the card to always be a perfect square (1:1 ratio)
+            // 2. w-full: Ensures it fills the grid column width
+            // 3. You can change 'aspect-square' to 'aspect-[4/3]' if you want rectangles
+            <div key={idx} className="aspect-square w-full relative">
+              {/* We clone the element or wrap it to force height: 100% */}
+              <div className="h-full w-full">
+                {/* Ensure your FeatureBox component allows className props or naturally fills height */}
+                <FeatureBox {...feature} />
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -102,9 +116,8 @@ const UseCaseRow = ({
           {stats.map((stat, idx) => (
             <div
               key={idx}
-              className={`px-2 flex flex-col items-center lg:items-start ${
-                idx === 0 ? "pl-0" : ""
-              }`}
+              className={`px-2 flex flex-col items-center lg:items-start ${idx === 0 ? "pl-0" : ""
+                }`}
             >
               <span className="text-4xl font-bold text-brand-accent mb-2">
                 {stat.value}
@@ -116,12 +129,14 @@ const UseCaseRow = ({
           ))}
         </div>
 
-        <Button
-          variant="outline"
-          className="rounded-full px-8 py-6 text-brand-accent border-gray-300 hover:bg-brand-light"
-        >
-          Learn More
-        </Button>
+        <Link href="/products">
+          <Button
+            variant="outline"
+            className="rounded-full px-8 py-6 text-brand-accent border-gray-300 hover:bg-brand-light"
+          >
+            Learn More
+          </Button>
+        </Link>
       </div>
     </div>
   );

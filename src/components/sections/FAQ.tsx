@@ -58,14 +58,7 @@ const FAQ = () => {
         </div>
 
         {/* Load More Button */}
-        <div className="flex justify-center">
-          <Button
-            variant="outline"
-            className="rounded-full px-6 py-5 border-gray-200 text-brand-primary font-medium bg-white hover:bg-gray-50 flex items-center gap-2 shadow-sm"
-          >
-            Load All FAQ&apos;s <ChevronDown className="w-4 h-4" />
-          </Button>
-        </div>
+
       </div>
     </section>
   );

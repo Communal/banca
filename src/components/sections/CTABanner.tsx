@@ -3,8 +3,7 @@ import { Button } from "@/components/ui/button";
 const CTABanner = () => {
   return (
     <section className="py-20 container mx-auto px-4">
-      <div className="relative bg-[#262626] rounded-[2.5rem] p-8 md:p-16 overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16 text-center lg:text-left">
-        {/* --- Decorative Dot Pattern (Top Left) --- */}
+<div className="relative bg-[url('/images/cta.png')] bg-cover bg-center bg-no-repeat rounded-[2.5rem] p-8 md:p-16 overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16 text-center lg:text-left">        {/* --- Decorative Dot Pattern (Top Left) --- */}
         <div className="absolute top-0 left-0 p-4 sm:p-6 opacity-30">
           <svg
             width="100"
@@ -42,7 +41,7 @@ const CTABanner = () => {
             Start your financial journey with{" "}
             <span className="text-brand-accent">Montedeiazzu today!</span>
           </h2>
-          <p className="text-gray-400 leading-relaxed text-base md:text-lg">
+          <p className="text-white leading-relaxed text-base md:text-lg">
             Lorem ipsum dolor sit amet consectetur. Blandit odio semper risus
             pellentesque elit. Pellentesque eget ut imperdiet nulla penatibus.
             Nascetur viverra arcu sed amet cursus purus.

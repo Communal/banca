@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -41,9 +42,11 @@ const Hero = () => {
         </p>
 
         {/* Button */}
+        <Link href="/signup">
         <Button className="bg-brand-accent hover:bg-blue-700 rounded-full px-8 py-6 text-lg font-medium">
           Open Account
         </Button>
+        </Link>
       </div>
 
       {/* Right Image */}

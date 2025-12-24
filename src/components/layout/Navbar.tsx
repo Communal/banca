@@ -13,10 +13,10 @@ const Navbar = () => {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "Careers", href: "/careers" },
     { name: "Products", href: "/products" },
     { name: "About", href: "/about" },
     { name: "Security", href: "/security" },
+    { name: "Careers", href: "/careers" },
   ];
 
   const isActiveLink = (path: string) => pathname === path;
