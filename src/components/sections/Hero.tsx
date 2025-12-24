@@ -27,14 +27,14 @@ const Hero = () => {
 
         {/* Title */}
         <h1 className="text-4xl md:text-6xl font-bold leading-tight text-[#1C1C1C]">
-          Welcome to YourBank <br />
+          Welcome to Montedeiazzu <br />
           Empowering Your{" "}
           <span className="text-brand-accent">Financial Journey</span>
         </h1>
 
         {/* Description */}
         <p className="text-lg text-gray-600 max-w-xl">
-          At YourBank, our mission is to provide comprehensive banking solutions
+          At Montedeiazzu, our mission is to provide comprehensive banking solutions
           that empower individuals and businesses to achieve their financial
           goals. We are committed to delivering personalized and innovative
           services that prioritize our customers' needs.
@@ -51,7 +51,7 @@ const Hero = () => {
 
         <Image
           src="/images/Container.png"
-          alt="YourBank Dashboard Mockup"
+          alt="Montedeiazzu Dashboard Mockup"
           width={600}
           height={600}
           className="w-full h-auto object-contain"

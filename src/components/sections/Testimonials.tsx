@@ -9,32 +9,32 @@ const testimonialsData = [
   {
     type: "Individuals",
     quote:
-      "YourBank has been my trusted financial partner for years. Their personalized service and innovative digital banking solutions have made managing my finances a breeze.",
+      "Montedeiazzu has been my trusted financial partner for years. Their personalized service and innovative digital banking solutions have made managing my finances a breeze.",
     author: "Sara T",
   },
   {
     type: "Businesses",
     quote:
-      "I recently started my own business, and YourBank has been instrumental in helping me set up my business accounts and secure the financing I needed. Their expert guidance and tailored solutions have been invaluable.",
+      "I recently started my own business, and Montedeiazzu has been instrumental in helping me set up my business accounts and secure the financing I needed. Their expert guidance and tailored solutions have been invaluable.",
     author: "John D",
   },
   {
     type: "Individuals",
     quote:
-      "I love the convenience of YourBank's mobile banking app. It allows me to stay on top of my finances and make transactions on the go. The app is user-friendly and secure, giving me peace of mind.",
+      "I love the convenience of Montedeiazzu's mobile banking app. It allows me to stay on top of my finances and make transactions on the go. The app is user-friendly and secure, giving me peace of mind.",
     author: "Emily G",
   },
   // Add more business testimonials for a complete set
   {
     type: "Businesses",
     quote:
-      "YourBank's business tools have streamlined our payroll and invoicing, saving us countless hours. We can now focus on growing our company.",
+      "Montedeiazzu's business tools have streamlined our payroll and invoicing, saving us countless hours. We can now focus on growing our company.",
     author: "Michael R",
   },
   {
     type: "Businesses",
     quote:
-      "The business loan process was incredibly smooth. The team at YourBank understood our vision and provided the capital we needed to expand our operations.",
+      "The business loan process was incredibly smooth. The team at Montedeiazzu understood our vision and provided the capital we needed to expand our operations.",
     author: "David K",
   },
 ];
@@ -93,7 +93,7 @@ const Testimonials = () => {
               Our <span className="text-brand-accent">Testimonials</span>
             </h2>
             <p className="text-gray-600">
-              Discover how YourBank has transformed lives with innovative
+              Discover how Montedeiazzu has transformed lives with innovative
               digital solutions and personalized customer service. See why our
               clients trust us for a secure and prosperous financial journey.
             </p>

@@ -121,7 +121,7 @@ export default function AdminLoginPage() {
             <div className="bg-[#2D60FF] text-white p-1 rounded-sm w-6 h-6 flex items-center justify-center">
               <div className="w-3 h-3 bg-white rotate-45"></div>
             </div>
-            <span className="font-bold text-xl text-[#343C6A]">YourBanK</span>
+            <span className="font-bold text-xl text-[#343C6A]">Montedeiazzu</span>
           </div>
           <div className="w-full h-px bg-gray-300"></div>
           <div className="flex flex-col md:flex-row items-center gap-6 md:gap-12 text-sm text-[#343C6A] font-medium">
@@ -150,7 +150,7 @@ export default function AdminLoginPage() {
               </div>
             </div>
             <p className="text-gray-500 text-sm mt-4 md:mt-0">
-              YourBank All Rights Reserved
+              Montedeiazzu All Rights Reserved
             </p>
             <div className="flex gap-4 text-sm text-gray-500">
               <span className="hover:text-[#2D60FF] cursor-pointer">

@@ -62,7 +62,7 @@ const MissionSection = () => {
           <div className="w-full md:w-1/2 space-y-6">
             <h3 className="text-3xl font-bold text-brand-primary">Mission</h3>
             <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-              At YourBank, our mission is to empower our customers to achieve
+              At Montedeiazzu, our mission is to empower our customers to achieve
               their financial goals. We are dedicated to delivering exceptional
               banking solutions that cater to their unique needs. Through
               personalized services, expert guidance, and cutting-edge
@@ -120,7 +120,7 @@ const MissionSection = () => {
           <div className="w-full md:w-1/2 space-y-6">
             <h3 className="text-3xl font-bold text-brand-primary">Vision</h3>
             <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-              Our vision at YourBank is to redefine banking by creating a
+              Our vision at Montedeiazzu is to redefine banking by creating a
               seamless and personalized experience for our customers. We
               envision a future where banking is accessible, transparent, and
               tailored to individual preferences. Through continuous innovation

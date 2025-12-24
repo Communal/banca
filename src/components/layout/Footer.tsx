@@ -35,7 +35,7 @@ const Footer = () => {
             </div>
           </div>
           <span className="font-bold text-xl text-brand-primary tracking-tight">
-            YourBanK
+            Montedeiazzu
           </span>
         </div>
 
@@ -99,7 +99,7 @@ const Footer = () => {
             {/* 2. Copyright */}
             {/* Mobile: Center. Desktop: Center absolute or flex. */}
             <div className="text-sm text-center md:absolute md:left-1/2 md:transform md:-translate-x-1/2 md:order-2 text-gray-500 md:text-gray-500">
-              YourBank All Rights Reserved
+              Montedeiazzu All Rights Reserved
             </div>
 
             {/* 3. Legal Links */}

@@ -52,12 +52,12 @@ const CareersHero = () => {
 
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#1C1C1C] mb-6 leading-tight">
             Welcome to <br />
-            <span className="text-[#2D60FF]">YourBank</span> Careers!
+            <span className="text-[#2D60FF]">Montedeiazzu</span> Careers!
           </h1>
 
           <p className="text-gray-500 text-sm md:text-lg leading-relaxed">
             Join our team and embark on a rewarding journey in the banking
-            industry. At YourBank, we are committed to fostering a culture of
+            industry. At Montedeiazzu, we are committed to fostering a culture of
             excellence and providing opportunities for professional growth. With
             a focus on innovation, customer service, and integrity, we strive to
             make a positive impact in the lives of our customers and

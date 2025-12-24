@@ -63,7 +63,7 @@ export const AdminSidebar = ({
             <div className="bg-[#2D60FF] text-white p-1 rounded-sm w-7 h-7 flex items-center justify-center">
               <div className="w-3.5 h-3.5 bg-white rotate-45"></div>
             </div>
-            YourBanK
+            Montedeiazzu
           </div>
         </div>
 

@@ -83,7 +83,7 @@ const Features = () => {
             Our <span className="text-brand-accent">Features</span>
           </h2>
           <p className="text-gray-600 leading-relaxed">
-            Experience a host of powerful features at YourBank, including
+            Experience a host of powerful features at Montedeiazzu, including
             seamless online banking, secure transactions, and personalized
             financial insights, all designed to enhance your banking experience.
           </p>

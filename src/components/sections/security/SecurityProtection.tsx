@@ -36,7 +36,7 @@ const SecurityProtection = () => {
           How We <span className="text-brand-accent">Protect You</span>
         </h2>
         <p className="text-gray-600 max-w-3xl">
-          At YourBank, we prioritize the security and confidentiality of your
+          At Montedeiazzu, we prioritize the security and confidentiality of your
           financial information. Our state-of-the-art encryption technology and
           stringent data protection measures ensure your assets and transactions
           are safeguarded at all times.

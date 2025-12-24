@@ -4,7 +4,7 @@ const contactMethods = [
   {
     icon: Mail,
     title: "Email Us",
-    info: "hello@yourbank.com",
+    info: "hello@Montedeiazzu.com",
     desc: "Send us an email anytime, and we'll get back to you within 24 hours.",
   },
   {
@@ -22,7 +22,7 @@ const contactMethods = [
   {
     icon: Twitter, // Or use a generic 'Message' icon
     title: "Social Media",
-    info: "@YourBank",
+    info: "@Montedeiazzu",
     desc: "Follow us for updates and reach out via direct message.",
   },
 ];

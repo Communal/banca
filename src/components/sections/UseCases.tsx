@@ -151,7 +151,7 @@ const UseCases = () => {
   const businessData: UseCaseRowProps = {
     title: "For Business",
     description:
-      "For businesses, we empower growth with working capital solutions that optimize cash flow, and our tailored financing options fuel business expansion. Whatever your financial aspirations, YourBank is committed to providing the right tools.",
+      "For businesses, we empower growth with working capital solutions that optimize cash flow, and our tailored financing options fuel business expansion. Whatever your financial aspirations, Montedeiazzu is committed to providing the right tools.",
     stats: [
       { value: "65%", label: "Cash Flow Management" },
       { value: "70%", label: "Drive Business Expansion" },
@@ -175,7 +175,7 @@ const UseCases = () => {
             Use <span className="text-brand-accent">Cases</span>
           </h2>
           <p className="text-gray-600">
-            At YourBank, we cater to the diverse needs of individuals and
+            At Montedeiazzu, we cater to the diverse needs of individuals and
             businesses alike, offering a wide range of financial solutions.
           </p>
         </div>

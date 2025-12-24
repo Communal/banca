@@ -147,7 +147,7 @@ export default function ProductsPage() {
             </h1>
             <p className="text-gray-600 max-w-2xl text-sm md:text-base">
               Discover a range of comprehensive and customizable banking
-              products at YourBank, designed to suit your unique financial needs
+              products at Montedeiazzu, designed to suit your unique financial needs
               and aspirations.
             </p>
           </div>

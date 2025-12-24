@@ -30,7 +30,7 @@ const Values = () => {
           Our <span className="text-brand-accent">Values</span>
         </h2>
         <p className="text-gray-600 max-w-3xl">
-          At YourBank, our values form the foundation of our organization and
+          At Montedeiazzu, our values form the foundation of our organization and
           guide our actions. We believe in upholding the highest standards of
           integrity, delivering exceptional service, and embracing innovation.
         </p>

@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useDashboardStore } from "@/store/useDashboardStore";
 import {
@@ -9,7 +10,6 @@ import {
   Settings,
   PieChart,
   DollarSign,
-  X,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -45,10 +45,14 @@ export const Sidebar = () => {
       >
         {/* Logo Area */}
         <div className="flex items-center gap-2 p-8 mb-4">
-          <div className="text-[#2D60FF]">{/* Insert Logo Icon Here */}</div>
-          <span className="font-extrabold text-2xl text-[#343C6A]">
-            YourBanK
-          </span>
+          <Image
+            src="/images/web.png"
+            alt="Montedeiazzu Desktop Logo"
+            width={220}
+            height={200}
+            className="hidden md:block object-contain"
+            priority
+          />
         </div>
 
         {/* Navigation */}

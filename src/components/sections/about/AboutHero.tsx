@@ -16,7 +16,7 @@ const AboutHero = () => {
         <div className="relative w-full h-64 md:absolute md:top-0 md:right-0 md:w-[60%] md:h-full md:rounded-[3rem] overflow-hidden">
           <Image
             src="/images/Image.png"
-            alt="YourBank Team"
+            alt="Montedeiazzu Team"
             fill
             className="object-cover "
             priority
@@ -52,7 +52,7 @@ const AboutHero = () => {
 
           <div>
             <span className="text-gray-800 font-medium text-lg block mb-2">
-              Welcome to YourBank
+              Welcome to Montedeiazzu
             </span>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#1C1C1C] mt-2 mb-6 leading-tight">
               Where Banking Meets <br />
@@ -61,7 +61,7 @@ const AboutHero = () => {
           </div>
 
           <p className="text-gray-500 leading-relaxed text-sm md:text-base lg:text-lg">
-            At YourBank, we believe that banking should be more than just
+            At Montedeiazzu, we believe that banking should be more than just
             transactions. It should be an experience that empowers individuals
             and businesses to thrive and reach their financial goals. As a
             trusted financial institution, we are committed to delivering

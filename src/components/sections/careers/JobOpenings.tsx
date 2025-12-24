@@ -8,7 +8,7 @@ const jobsData = [
     location: "New Delhi, India",
     department: "Retail Banking",
     about:
-      "As a Relationship Manager at YourBank, you will be the primary point of contact for our valued customers. You will be responsible for building and maintaining strong relationships, understanding their financial needs, and providing personalized solutions. Your goal will be to enhance customer satisfaction and drive business growth through effective cross-selling and client retention strategies.",
+      "As a Relationship Manager at Montedeiazzu, you will be the primary point of contact for our valued customers. You will be responsible for building and maintaining strong relationships, understanding their financial needs, and providing personalized solutions. Your goal will be to enhance customer satisfaction and drive business growth through effective cross-selling and client retention strategies.",
     requirements: [
       "Bachelor's degree in Business, Finance, or a related field.",
       "Minimum of 3-5 years of experience in banking or relationship management.",
@@ -22,7 +22,7 @@ const jobsData = [
     location: "Mumbai, India",
     department: "Risk Management",
     about:
-      "As a Risk Analyst at YourBank, you will play a vital role in identifying, assessing, and mitigating risks across our operations. You will utilize advanced analytical tools and models to evaluate credit, market, and operational risks. Your insights will contribute to informed decision-making and ensure regulatory compliance, safeguarding the bank's financial stability and reputation.",
+      "As a Risk Analyst at Montedeiazzu, you will play a vital role in identifying, assessing, and mitigating risks across our operations. You will utilize advanced analytical tools and models to evaluate credit, market, and operational risks. Your insights will contribute to informed decision-making and ensure regulatory compliance, safeguarding the bank's financial stability and reputation.",
     requirements: [
       "Bachelor's degree in Finance, Economics, Mathematics, or related field.",
       "Minimum of 2-4 years of experience in risk management or financial analysis.",
@@ -36,7 +36,7 @@ const jobsData = [
     location: "Bangalore, India",
     department: "Information Technology",
     about:
-      "As an IT Security Specialist at YourBank, you will be responsible for protecting our systems, networks, and data from cyber threats. You will implement security measures, monitor for vulnerabilities, and respond to security incidents. Your expertise will ensure the confidentiality, integrity, and availability of our critical information assets.",
+      "As an IT Security Specialist at Montedeiazzu, you will be responsible for protecting our systems, networks, and data from cyber threats. You will implement security measures, monitor for vulnerabilities, and respond to security incidents. Your expertise will ensure the confidentiality, integrity, and availability of our critical information assets.",
     requirements: [
       "Bachelor's degree in Computer Science, Information Security, or related field.",
       "Minimum of 5+ years of experience in IT security.",
@@ -56,7 +56,7 @@ const JobOpenings = () => {
           Job <span className="text-brand-accent">Openings</span>
         </h2>
         <p className="text-gray-600 max-w-3xl">
-          Explore exciting career opportunities at YourBank and join our team of
+          Explore exciting career opportunities at Montedeiazzu and join our team of
           dedicated professionals. We are always looking for talented
           individuals who are passionate about making a difference in the
           banking industry.

@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 
 const faqData = [
   {
-    question: "How do I open an account with YourBank?",
+    question: "How do I open an account with Montedeiazzu?",
     answer:
-      'Opening an account with YourBank is easy. Simply visit our website and click on the "Open an Account" button. Follow the prompts, provide the required information, and complete the application process. If you have any questions or need assistance, our customer support team is available to help.',
+      'Opening an account with Montedeiazzu is easy. Simply visit our website and click on the "Open an Account" button. Follow the prompts, provide the required information, and complete the application process. If you have any questions or need assistance, our customer support team is available to help.',
   },
   {
     question: "What documents do I need to provide to apply for a loan?",
@@ -20,7 +20,7 @@ const faqData = [
   {
     question: "Are my transactions and personal information secure?",
     answer:
-      "At YourBank, we prioritize the security of your transactions and personal information. We employ industry-leading encryption and multi-factor authentication to ensure that your data is protected. Additionally, we regularly update our security measures to stay ahead of emerging threats. You can bank with confidence knowing that we have robust security systems in place.",
+      "At Montedeiazzu, we prioritize the security of your transactions and personal information. We employ industry-leading encryption and multi-factor authentication to ensure that your data is protected. Additionally, we regularly update our security measures to stay ahead of emerging threats. You can bank with confidence knowing that we have robust security systems in place.",
   },
 ];
 
@@ -36,7 +36,7 @@ const FAQ = () => {
           </h2>
           <p className="text-gray-600">
             Still you have any questions? Contact our Team via
-            support@yourbank.com
+            support@Montedeiazzu.com
           </p>
         </div>
 

@@ -40,7 +40,7 @@ const CTABanner = () => {
         <div className="relative z-10 max-w-2xl space-y-4">
           <h2 className="text-3xl md:text-5xl font-bold text-white">
             Start your financial journey with{" "}
-            <span className="text-brand-accent">YourBank today!</span>
+            <span className="text-brand-accent">Montedeiazzu today!</span>
           </h2>
           <p className="text-gray-400 leading-relaxed text-base md:text-lg">
             Lorem ipsum dolor sit amet consectetur. Blandit odio semper risus

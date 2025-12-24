@@ -6,7 +6,7 @@ const Benefits = () => {
       icon: Scale, // Represents Competitive Compensation
       title: "Competitive Compensation",
       description:
-        "We provide a competitive salary package that recognizes the skills and expertise of our employees. YourBank believes in rewarding exceptional performance and offering opportunities for financial growth.",
+        "We provide a competitive salary package that recognizes the skills and expertise of our employees. Montedeiazzu believes in rewarding exceptional performance and offering opportunities for financial growth.",
     },
     {
       icon: HeartPulse, // Represents Health and Wellness
@@ -18,13 +18,13 @@ const Benefits = () => {
       icon: Briefcase, // Represents Retirement Planning (or PiggyBank)
       title: "Retirement Planning",
       description:
-        "YourBank is committed to helping employees plan for their future. We offer a generous retirement savings plan with employer matches to help team members build a secure financial foundation.",
+        "Montedeiazzu is committed to helping employees plan for their future. We offer a generous retirement savings plan with employer matches to help team members build a secure financial foundation.",
     },
     {
       icon: GraduationCap, // Represents Work-Life Balance (or Sun/Coffee icon)
       title: "Work-Life Balance",
       description:
-        "We understand the importance of maintaining a healthy work-life balance. YourBank offers flexible work arrangements, paid time off, parental leave, and other programs to support employees in managing their personal and professional commitments.",
+        "We understand the importance of maintaining a healthy work-life balance. Montedeiazzu offers flexible work arrangements, paid time off, parental leave, and other programs to support employees in managing their personal and professional commitments.",
     },
   ];
 
@@ -36,7 +36,7 @@ const Benefits = () => {
           Our <span className="text-brand-accent">Benefits</span>
         </h2>
         <p className="text-gray-600 max-w-3xl">
-          At YourBank, we value our employees and are dedicated to their
+          At Montedeiazzu, we value our employees and are dedicated to their
           well-being and success. We offer a comprehensive benefits package
           designed to support their health, financial stability, and career
           growth.

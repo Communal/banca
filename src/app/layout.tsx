@@ -7,8 +7,11 @@ import TawkToChat from "@/components/TawkToChat";
 const lexend = Lexend({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "YourBank - Empowering Your Financial Journey",
+  title: "Montedeiazzu - Empowering Your Financial Journey",
   description: "Modern banking solutions.",
+  icons: {
+    icon: "/images/icon.png",
+  },
 };
 
 export const viewport: Viewport = {
