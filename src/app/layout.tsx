@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
-import Providers from "./providers"; // Keep this here!
+import Providers from "./providers";
+import TawkToChat from "@/components/TawkToChat";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
@@ -27,7 +28,10 @@ export default function RootLayout({
       <body
         className={`${lexend.className} bg-brand-light antialiased overflow-x-hidden`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <TawkToChat />
+        </Providers>
       </body>
     </html>
   );
