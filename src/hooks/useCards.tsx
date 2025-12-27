@@ -11,6 +11,7 @@ export interface Card {
   validThru: string;
   balance: number;
   cardProvider: "visa" | "mastercard";
+  currency: string;
 }
 
 export interface CardWithTransactions extends Card {

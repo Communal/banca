@@ -5,9 +5,16 @@ import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { toast } from "sonner";
 import { Camera } from "lucide-react";
+import { CURRENCIES } from "@/lib/currency";
 
 export default function AddUserPage() {
   const router = useRouter();
@@ -18,13 +25,14 @@ export default function AddUserPage() {
     fullName: "",
     userName: "",
     email: "",
-    password: "", // Required for new users
+    password: "",
     dateOfBirth: "",
     presentAddress: "",
     permanentAddress: "",
     city: "",
     postalCode: "",
     country: "",
+    currency: "USD", // Default
   });
 
   const createMutation = useMutation({
@@ -40,9 +48,8 @@ export default function AddUserPage() {
       return data;
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["admin-data"] }); // Refresh dashboard list
+      queryClient.invalidateQueries({ queryKey: ["admin-data"] });
       toast.success("User created successfully!");
-      // Redirect to the EDIT page of this new user so you can add cards immediately
       router.push(`/admin/users/${data.userId}`);
     },
     onError: (error: Error) => {
@@ -54,6 +61,10 @@ export default function AddUserPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleCurrencyChange = (value: string) => {
+    setFormData({ ...formData, currency: value });
+  };
+
   const handleSubmit = () => {
     createMutation.mutate(formData);
   };
@@ -63,8 +74,7 @@ export default function AddUserPage() {
       <div className="border-b border-gray-200 mb-8 pb-4">
         <h2 className="text-[#343C6A] text-xl font-bold">Add New User</h2>
         <p className="text-[#718EBF] text-sm">
-          Create a new user profile. You can add cards and transactions after
-          saving.
+          Create a new user profile. You can add cards and transactions after saving.
         </p>
       </div>
 
@@ -82,9 +92,7 @@ export default function AddUserPage() {
         <div className="flex-1 space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-[#343C6A] text-sm font-medium">
-                Full Name *
-              </label>
+              <label className="text-[#343C6A] text-sm font-medium">Full Name *</label>
               <Input
                 name="fullName"
                 placeholder="ex. Charlene Reed"
@@ -94,9 +102,7 @@ export default function AddUserPage() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[#343C6A] text-sm font-medium">
-                User Name
-              </label>
+              <label className="text-[#343C6A] text-sm font-medium">User Name</label>
               <Input
                 name="userName"
                 placeholder="ex. Charlene"
@@ -106,9 +112,7 @@ export default function AddUserPage() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[#343C6A] text-sm font-medium">
-                Email *
-              </label>
+              <label className="text-[#343C6A] text-sm font-medium">Email *</label>
               <Input
                 name="email"
                 type="email"
@@ -119,9 +123,7 @@ export default function AddUserPage() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[#343C6A] text-sm font-medium">
-                Password *
-              </label>
+              <label className="text-[#343C6A] text-sm font-medium">Password *</label>
               <Input
                 name="password"
                 type="password"
@@ -132,9 +134,7 @@ export default function AddUserPage() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[#343C6A] text-sm font-medium">
-                Date of Birth
-              </label>
+              <label className="text-[#343C6A] text-sm font-medium">Date of Birth</label>
               <Input
                 name="dateOfBirth"
                 type="date"
@@ -143,10 +143,27 @@ export default function AddUserPage() {
                 className="h-12 rounded-2xl border-gray-200 text-[#718EBF]"
               />
             </div>
+
+            {/* --- CURRENCY SELECTOR --- */}
             <div className="space-y-2">
-              <label className="text-[#343C6A] text-sm font-medium">
-                Present Address
-              </label>
+              <label className="text-[#343C6A] text-sm font-medium">Account Currency *</label>
+              <Select value={formData.currency} onValueChange={handleCurrencyChange}>
+                <SelectTrigger className="h-12 rounded-2xl border-gray-200 text-[#718EBF]">
+                  <SelectValue placeholder="Select Currency" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CURRENCIES.map((c) => (
+                    <SelectItem key={c.value} value={c.value}>
+                      {c.label} ({c.symbol})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            {/* ------------------------- */}
+
+            <div className="space-y-2">
+              <label className="text-[#343C6A] text-sm font-medium">Present Address</label>
               <Input
                 name="presentAddress"
                 placeholder="San Jose, CA"
@@ -156,9 +173,7 @@ export default function AddUserPage() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[#343C6A] text-sm font-medium">
-                Permanent Address
-              </label>
+              <label className="text-[#343C6A] text-sm font-medium">Permanent Address</label>
               <Input
                 name="permanentAddress"
                 placeholder="San Jose, CA"
@@ -178,9 +193,7 @@ export default function AddUserPage() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[#343C6A] text-sm font-medium">
-                Postal Code
-              </label>
+              <label className="text-[#343C6A] text-sm font-medium">Postal Code</label>
               <Input
                 name="postalCode"
                 placeholder="45962"
@@ -190,9 +203,7 @@ export default function AddUserPage() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-[#343C6A] text-sm font-medium">
-                Country
-              </label>
+              <label className="text-[#343C6A] text-sm font-medium">Country</label>
               <Input
                 name="country"
                 placeholder="USA"

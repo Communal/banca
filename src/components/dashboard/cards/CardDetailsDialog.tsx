@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/dialog";
 import { useCardDetails } from "@/hooks/useCards";
 import Image from "next/image";
+import { formatCurrency } from "@/lib/currency";
 
 interface CardDetailsDialogProps {
   cardId: string | null;
@@ -21,6 +22,9 @@ export const CardDetailsDialog = ({
 }: CardDetailsDialogProps) => {
   const { data: card, isLoading } = useCardDetails(cardId);
 
+  // Helper for logo
+  const logoSrc = card?.cardProvider === 'visa' ? '/icons/visa.png' : '/icons/mastercard.png';
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md bg-white rounded-3xl p-8">
@@ -34,38 +38,49 @@ export const CardDetailsDialog = ({
           <div className="h-40 animate-pulse bg-gray-100 rounded-xl" />
         ) : card ? (
           <div className="space-y-6">
-            {/* Visual Representation */}
-            <div className="bg-linear-to-r from-[#2D60FF] to-[#539BFF] p-6 rounded-2xl text-white shadow-lg">
+            {/* Visual Representation (Matching Carousel Style) */}
+            <div className="bg-linear-to-r from-[#2D60FF] to-[#539BFF] p-6 rounded-[2rem] text-white shadow-lg relative overflow-hidden">
+
               <div className="flex justify-between items-start mb-8">
                 <div>
                   <p className="text-xs opacity-80">Balance</p>
-                  <p className="text-xl font-semibold">${card.balance}</p>
+                  <p className="text-2xl font-semibold">
+                    {formatCurrency(card.balance, card.currency)}
+                  </p>
                 </div>
+                {/* Chip Image */}
                 <Image
-                  src="/icons/chip-card.png"
+                  src="/images/chip-card.png"
                   alt="Chip"
-                  width={32}
-                  height={32}
-                  className="opacity-80"
+                  width={40}
+                  height={40}
+                  className="opacity-90"
                 />
               </div>
-              <div className="flex justify-between items-end">
+
+              <div className="flex justify-between items-end gap-8">
                 <div>
-                  <p className="text-xs opacity-80 uppercase">Card Holder</p>
+                  <p className="text-xs opacity-80 uppercase mb-1">Card Holder</p>
                   <p className="text-sm font-medium">{card.cardHolder}</p>
                 </div>
                 <div>
-                  <p className="text-xs opacity-80 uppercase">Valid Thru</p>
+                  <p className="text-xs opacity-80 uppercase mb-1">Valid Thru</p>
                   <p className="text-sm font-medium">{card.validThru}</p>
                 </div>
               </div>
-              <div className="mt-4 flex justify-between items-center">
-                <p className="font-mono text-lg tracking-widest">
+
+              <div className="mt-6 flex justify-between items-center">
+                <p className="font-mono text-xl tracking-widest">
                   **** **** **** {card.lastFourDigits}
                 </p>
-                <div className="opacity-80">
-                  {/* Master/Visa Icon */}
-                  <div className="w-8 h-5 bg-white/20 rounded-sm"></div>
+                {/* Provider Logo */}
+                <div className="relative w-12 h-8">
+                  <Image
+                    src={logoSrc}
+                    alt={card.cardProvider}
+                    fill
+                    className="object-contain"
+                  />
                 </div>
               </div>
             </div>
@@ -85,8 +100,10 @@ export const CardDetailsDialog = ({
                 </span>
               </div>
               <div className="flex justify-between border-b pb-2">
-                <span className="text-gray-500 text-sm">Status</span>
-                <span className="font-medium text-green-500">Active</span>
+                <span className="text-gray-500 text-sm">Currency</span>
+                <span className="font-medium text-[#343C6A]">
+                  {card.currency}
+                </span>
               </div>
             </div>
 
@@ -109,7 +126,8 @@ export const CardDetailsDialog = ({
                         tx.amount < 0 ? "text-red-500" : "text-green-500"
                       }
                     >
-                      {tx.amount < 0 ? "-" : "+"}${Math.abs(tx.amount)}
+                      {tx.amount > 0 ? "+" : ""}
+                      {formatCurrency(tx.amount, card.currency)}
                     </span>
                   </div>
                 ))}

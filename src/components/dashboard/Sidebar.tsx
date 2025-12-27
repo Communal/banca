@@ -10,8 +10,11 @@ import {
   Settings,
   PieChart,
   DollarSign,
+  LogOut
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLogout } from "@/hooks/useLogout";
+
 
 const links = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
@@ -24,6 +27,8 @@ const links = [
 
 export const Sidebar = () => {
   const pathname = usePathname();
+  const logout = useLogout();
+
   const { isMobileMenuOpen, closeMobileMenu } = useDashboardStore();
 
   return (
@@ -83,6 +88,15 @@ export const Sidebar = () => {
             );
           })}
         </nav>
+        <div className="p-4 border-t border-gray-50">
+          <button
+            onClick={() => logout.mutate()}
+            className="flex items-center gap-4 px-4 py-3.5 rounded-xl font-medium text-[#B1B1B1] hover:bg-red-50 hover:text-red-500 w-full transition-colors"
+          >
+            <LogOut size={22} />
+            Log Out
+          </button>
+        </div>
       </aside>
     </>
   );

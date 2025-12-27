@@ -5,6 +5,8 @@ import { useTransactions } from "@/hooks/useTransactions";
 import { ArrowUpCircle, ArrowDownCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CustomPagination } from "@/components/ui/CustomPagination";
+import { formatCurrency } from "@/lib/currency"; // <--- IMPORT
+import { useCurrentUser } from "@/hooks/useCurrentUser"; // <--- IMPORT
 
 // --- HELPERS ---
 
@@ -28,7 +30,6 @@ const TransactionIcon = ({ amount }: { amount: number }) => {
 };
 
 // --- TABS COMPONENT ---
-// (Defined outside render to prevent recreation)
 interface TabsProps {
   filter: "all" | "income" | "expense";
   setFilter: (filter: "all" | "income" | "expense") => void;
@@ -65,6 +66,10 @@ const Tabs = ({ filter, setFilter, setPage }: TabsProps) => (
 export default function TransactionsPage() {
   const [filter, setFilter] = useState<"all" | "income" | "expense">("all");
   const [page, setPage] = useState(1);
+
+  // Fetch User Preference
+  const { data: user } = useCurrentUser();
+  const currencyCode = user?.currency || "USD";
 
   const { data, isLoading } = useTransactions(page, filter);
   const transactions = data?.data || [];
@@ -107,7 +112,7 @@ export default function TransactionsPage() {
                 </tr>
               </thead>
               <tbody className="text-sm text-[#232323]">
-                {transactions.map((tx) => {
+                {transactions.map((tx: any) => {
                   const amt = Number(tx.amount);
                   return (
                     <tr
@@ -136,7 +141,9 @@ export default function TransactionsPage() {
                           amt > 0 ? "text-[#41D4A8]" : "text-[#FE5C73]"
                         )}
                       >
-                        {amt > 0 ? "+" : ""}${Math.abs(amt).toLocaleString()}
+                        {/* UPDATE: Use formatCurrency */}
+                        {amt > 0 ? "+" : ""}
+                        {formatCurrency(amt, currencyCode)}
                       </td>
                       <td className="py-4">
                         <button className="border border-[#123288] text-[#123288] rounded-full px-4 py-1.5 text-xs font-medium hover:bg-blue-50 transition-colors">
@@ -152,7 +159,7 @@ export default function TransactionsPage() {
 
           {/* Mobile List */}
           <div className="md:hidden flex flex-col gap-3">
-            {transactions.map((tx) => {
+            {transactions.map((tx: any) => {
               const amt = Number(tx.amount);
               return (
                 <div
@@ -176,7 +183,9 @@ export default function TransactionsPage() {
                       amt > 0 ? "text-[#41D4A8]" : "text-[#FE5C73]"
                     )}
                   >
-                    {amt > 0 ? "+" : ""}${Math.abs(amt).toLocaleString()}
+                    {/* UPDATE: Use formatCurrency */}
+                    {amt > 0 ? "+" : ""}
+                    {formatCurrency(amt, currencyCode)}
                   </span>
                 </div>
               );
