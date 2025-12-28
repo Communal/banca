@@ -20,7 +20,7 @@ const links = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
   { name: "Transactions", href: "/dashboard/transactions", icon: DollarSign },
   { name: "Accounts", href: "/dashboard/accounts", icon: User },
-  { name: "Investments", href: "/dashboard/investments", icon: PieChart },
+  // { name: "Investments", href: "/dashboard/investments", icon: PieChart },
   { name: "Credit Cards", href: "/dashboard/cards", icon: CreditCard },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
