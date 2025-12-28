@@ -89,7 +89,7 @@ const MyCardsCarousel = () => {
                 {/* Chip Image */}
                 <div className="relative w-10 h-10">
                   <Image
-                    src="/images/card-chip.png"
+                    src="/images/chip-card.png"
                     alt="Chip"
                     width={40}
                     height={40}
