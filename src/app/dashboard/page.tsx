@@ -1,36 +1,91 @@
+"use client";
 import { WeeklyActivity } from "@/components/dashboard/WeeklyActivityChart";
 import { ExpenseStatistics } from "@/components/dashboard/ExpenseStatistics";
 import { RecentTransactions } from "@/components/dashboard/RecentTransactions";
 import { QuickTransfer } from "@/components/dashboard/QuickTransfer";
 import { BalanceHistory } from "@/components/dashboard/BalanceHistory";
+import { useCards } from "@/hooks/useCards";
+import { CreditCard } from "@/components/dashboard/cards/CreditCard";
+import Link from "next/link";
+
+// --- New Sub-Component for Dashboard ---
+const MyPrimaryCard = () => {
+  const { data: cards, isLoading } = useCards();
+
+  if (isLoading)
+    return (
+      <div className="h-[210px] w-full bg-gray-200 rounded-[2rem] animate-pulse" />
+    );
+
+  // Find primary card or default to first
+  const primaryCard =
+    cards?.find((c) => c.cardType === "primary") || cards?.[0];
+
+  if (!primaryCard) {
+    return (
+      <div className="h-[210px] w-full bg-white border border-dashed border-gray-300 rounded-[2rem] flex items-center justify-center text-gray-400">
+        No cards found
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full h-[210px]">
+      <CreditCard card={primaryCard} variant="blue" className="w-full h-full" />
+    </div>
+  );
+};
 
 export default function DashboardPage() {
   return (
     <div className="flex flex-col gap-8">
-      {/* Row 1: Weekly Activity (2/3) & Recent Transactions (1/3) */}
+      {/* Top Section Grid 
+        Mobile: Stacked (Cards first because they are first in DOM)
+        Desktop: 3 Columns (Charts Left, Cards Right via 'order' utility)
+      */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-        <div className="xl:col-span-2">
-          <WeeklyActivity />
-        </div>
-        <div className="xl:col-span-1">
+        
+        {/* --- Right Column (Cards & Transactions) --- */}
+        {/* Mobile: Appears 1st. Desktop: Moved to right (order-2) */}
+        <div className="xl:col-span-1 xl:order-2 flex flex-col gap-8">
+          {/* 1. My Cards Section */}
+          <div className="flex flex-col gap-4">
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-bold text-[#343C6A]">My Cards</h3>
+              <Link
+                href="/dashboard/cards"
+                className="text-[#343C6A] text-sm font-semibold hover:text-[#2D60FF]"
+              >
+                See All
+              </Link>
+            </div>
+            <MyPrimaryCard />
+          </div>
+
+          {/* 2. Recent Transactions */}
           <RecentTransactions />
         </div>
+
+        {/* --- Left Column (Charts) --- */}
+        {/* Mobile: Appears 2nd. Desktop: Moved to left (order-1) */}
+        <div className="xl:col-span-2 xl:order-1 flex flex-col gap-8">
+          <WeeklyActivity />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <ExpenseStatistics />
+          </div>
+        </div>
+
       </div>
 
-      {/* Row 2: Quick Transfer (1/3) & Expense Stats (2/3) */}
-      {/* Note: The design shows Expense as a Pie chart. Adjust col-spans based on your preference */}
+      {/* Row 2: Quick Transfer & Balance History */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-        <div className="xl:col-span-2">
-          <ExpenseStatistics /> {/* Or reverse if Quick Transfer is smaller */}
-        </div>
         <div className="xl:col-span-1">
           <QuickTransfer />
         </div>
-      </div>
-
-      {/* Row 3: Balance History (Full Width) */}
-      <div className="w-full">
-        <BalanceHistory />
+        <div className="xl:col-span-2">
+          <BalanceHistory />
+        </div>
       </div>
     </div>
   );

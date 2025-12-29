@@ -22,7 +22,6 @@ export const CardDetailsDialog = ({
 }: CardDetailsDialogProps) => {
   const { data: card, isLoading } = useCardDetails(cardId);
 
-  // Helper for logo
   const logoSrc = card?.cardProvider === 'visa' ? '/icons/visa.png' : '/icons/mastercard.png';
 
   return (
@@ -38,7 +37,6 @@ export const CardDetailsDialog = ({
           <div className="h-40 animate-pulse bg-gray-100 rounded-xl" />
         ) : card ? (
           <div className="space-y-6">
-            {/* Visual Representation (Matching Carousel Style) */}
             <div className="bg-linear-to-r from-[#2D60FF] to-[#539BFF] p-6 rounded-[2rem] text-white shadow-lg relative overflow-hidden">
 
               <div className="flex justify-between items-start mb-8">
@@ -71,9 +69,8 @@ export const CardDetailsDialog = ({
 
               <div className="mt-6 flex justify-between items-center">
                 <p className="font-mono text-xl tracking-widest">
-                  **** **** **** {card.lastFourDigits}
+                  {card.cardNumber}
                 </p>
-                {/* Provider Logo */}
                 <div className="relative w-12 h-8">
                   <Image
                     src={logoSrc}
