@@ -1,6 +1,7 @@
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { MobileHeader } from "@/components/dashboard/MobileHeader";
 import Image from "next/image";
+import { AccountStatusBanner } from "@/components/dashboard/AccountStatusBanner";
 
 export default function DashboardLayout({
   children,
@@ -35,7 +36,7 @@ export default function DashboardLayout({
         <main className="flex-1 p-4 md:p-10">
           {/* Mobile "Pill" Header (Visible only on Mobile) */}
           <MobileHeader />
-
+          <AccountStatusBanner />
           {children}
         </main>
       </div>
