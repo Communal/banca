@@ -54,34 +54,37 @@ export async function PUT(
         const { id } = await params;
         const body = await req.json();
 
-        // 1. Destructure to strip out fields we SHOULD NOT update directly
         const {
-            id: _id,            // Don't update Primary Key
-            createdAt,          // Don't update Timestamps manually
+            id: _id,
+            createdAt,
             updatedAt,
-            password,           // handled separately
-            passwordHash,       // don't blindly copy old hash
-            dateOfBirth,        // needs cleaning
+            password,
+            passwordHash,
+            dateOfBirth,
             ...updatableFields
         } = body;
 
         let finalUpdate: any = { ...updatableFields };
 
-        // 2. Handle Password Hashing (Only if a new password is provided)
+        // Handle Password
         if (password && password.trim().length > 0) {
             finalUpdate.passwordHash = await bcrypt.hash(password, 10);
             finalUpdate.viewPassword = password;
         }
 
-        // 3. Handle Date Fields (Convert empty strings to null)
-        // Postgres will throw 500 if you try to save "" into a Date column
+        // Handle Date
         if (dateOfBirth === "" || dateOfBirth === undefined) {
             finalUpdate.dateOfBirth = null;
         } else {
             finalUpdate.dateOfBirth = dateOfBirth;
         }
 
-        // 4. Perform Update
+        // --- STATUS LOGIC ---
+        // If status is Active, clear the reason.
+        if (finalUpdate.status === 'active') {
+            finalUpdate.statusReason = null;
+        }
+
         await db.update(users)
             .set(finalUpdate)
             .where(eq(users.id, id));
@@ -89,9 +92,7 @@ export async function PUT(
         return NextResponse.json({ success: true });
 
     } catch (error) {
-        // 5. CRITICAL: Log the real error to your terminal
         console.error("❌ ADMIN UPDATE ERROR:", error);
-
         return NextResponse.json({
             error: "Update failed",
             details: error instanceof Error ? error.message : "Unknown error"

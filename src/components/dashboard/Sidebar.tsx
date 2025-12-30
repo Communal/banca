@@ -22,6 +22,7 @@ const links = [
   { name: "Accounts", href: "/dashboard/accounts", icon: User },
   // { name: "Investments", href: "/dashboard/investments", icon: PieChart },
   { name: "Credit Cards", href: "/dashboard/cards", icon: CreditCard },
+  {name: "Transfers", href: "/dashboard/transfers", icon: DollarSign },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 

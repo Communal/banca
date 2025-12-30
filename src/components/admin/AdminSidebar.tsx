@@ -13,6 +13,8 @@ import {
   LogOut,
 } from "lucide-react";
 import { useLogout } from "@/hooks/useLogout";
+import Image from "next/image";
+
 
 interface AdminSidebarProps {
   isOpen: boolean;
@@ -58,13 +60,15 @@ export const AdminSidebar = ({
         )}
       >
         {/* Logo */}
-        <div className="h-20 flex items-center px-8 border-b border-gray-50 md:border-none">
-          <div className="flex items-center gap-2 text-[#343C6A] font-extrabold text-2xl tracking-tight">
-            <div className="bg-[#2D60FF] text-white p-1 rounded-sm w-7 h-7 flex items-center justify-center">
-              <div className="w-3.5 h-3.5 bg-white rotate-45"></div>
-            </div>
-            Montedeiazzu
-          </div>
+        <div className="flex items-center gap-2 p-8 mb-4">
+          <Image
+            src="/images/web.png"
+            alt="Montedeiazzu Desktop Logo"
+            width={220}
+            height={200}
+            className="hidden md:block object-contain"
+            priority
+          />
         </div>
 
         {/* Nav Links */}

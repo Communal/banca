@@ -15,8 +15,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { Send, CheckCircle2, Loader2, Ban } from "lucide-react";
+import { Send, Loader2, Ban } from "lucide-react";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils"; // <--- 1. Import cn utility
 
 export default function TransferPage() {
     const { data: user } = useCurrentUser();
@@ -33,26 +34,26 @@ export default function TransferPage() {
         note: "",
     });
 
-    // Check if functionality should be disabled
-    const isRestricted = user?.status === "blocked" || user?.status === "suspended";
+    const isActive = user?.status === "active";
+    const isDisabled = isLoading || !isActive;
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (isRestricted) {
-            toast.error(`Transfer failed: Account is ${user?.status}`);
+        if (!isActive) {
+            toast.error("Transfer failed: Your account is not active");
             return;
         }
 
         setIsLoading(true);
 
-        // Simulate API Call delay
         setTimeout(() => {
             setIsLoading(false);
-            setIsQueued(true); // Show Success State
+            setIsQueued(true);
             toast.success("Transfer has been queued!");
         }, 1500);
     };
+
 
     const handleReset = () => {
         setIsQueued(false);
@@ -66,7 +67,6 @@ export default function TransferPage() {
         });
     };
 
-    // --- 1. SUCCESS STATE (QUEUED) ---
     if (isQueued) {
         return (
             <div className="flex items-center justify-center min-h-[60vh]">
@@ -96,7 +96,6 @@ export default function TransferPage() {
         );
     }
 
-    // --- 2. FORM STATE ---
     return (
         <div className="max-w-3xl mx-auto">
             <div className="mb-8">
@@ -115,7 +114,7 @@ export default function TransferPage() {
                             Select Card
                         </Label>
                         <Select
-                            disabled={isRestricted}
+                            disabled={isDisabled}
                             value={formData.cardId}
                             onValueChange={(val) => setFormData({ ...formData, cardId: val })}
                         >
@@ -140,7 +139,7 @@ export default function TransferPage() {
                         </Label>
                         <Input
                             required
-                            disabled={isRestricted}
+                            disabled={isDisabled}
                             placeholder="Enter account number"
                             className="h-14 rounded-2xl bg-[#F7F9FC] border-transparent focus-visible:ring-[#1814F3] text-[#343C6A] text-base px-5 placeholder:text-gray-400"
                             value={formData.accountNumber}
@@ -157,7 +156,7 @@ export default function TransferPage() {
                         </Label>
                         <Input
                             required
-                            disabled={isRestricted}
+                            disabled={isDisabled}
                             placeholder="Enter bank name"
                             className="h-14 rounded-2xl bg-[#F7F9FC] border-transparent focus-visible:ring-[#1814F3] text-[#343C6A] text-base px-5 placeholder:text-gray-400"
                             value={formData.bankName}
@@ -174,7 +173,7 @@ export default function TransferPage() {
                         </Label>
                         <Input
                             required
-                            disabled={isRestricted}
+                            disabled={isDisabled}
                             placeholder="Enter recipient name"
                             className="h-14 rounded-2xl bg-[#F7F9FC] border-transparent focus-visible:ring-[#1814F3] text-[#343C6A] text-base px-5 placeholder:text-gray-400"
                             value={formData.recipientName}
@@ -196,7 +195,7 @@ export default function TransferPage() {
                             <Input
                                 required
                                 type="number"
-                                disabled={isRestricted}
+                                disabled={isDisabled}
                                 placeholder="0.00"
                                 className="h-14 rounded-2xl bg-[#F7F9FC] border-transparent focus-visible:ring-[#1814F3] text-[#343C6A] text-lg font-bold pl-10 pr-5 placeholder:text-gray-400"
                                 value={formData.amount}
@@ -213,7 +212,7 @@ export default function TransferPage() {
                             Add Note (Optional)
                         </Label>
                         <Textarea
-                            disabled={isRestricted}
+                            disabled={isDisabled}
                             placeholder="Write a note..."
                             className="min-h-[120px] rounded-2xl bg-[#F7F9FC] border-transparent focus-visible:ring-[#1814F3] text-[#343C6A] text-base p-5 placeholder:text-gray-400 resize-none"
                             value={formData.note}
@@ -227,14 +226,20 @@ export default function TransferPage() {
                     <div className="pt-4 flex gap-4">
                         <Button
                             type="submit"
-                            disabled={isLoading || isRestricted}
-                            className="flex-1 h-14 rounded-2xl bg-[#1814F3] hover:bg-blue-700 text-white text-lg font-medium shadow-lg shadow-blue-500/20 transition-all"
+                            disabled={isDisabled}
+                            // 2. Updated className to be conditional
+                            className={cn(
+                                "flex-1 h-14 rounded-2xl text-lg font-medium transition-all",
+                                isDisabled
+                                    ? "bg-gray-200 text-gray-400 cursor-not-allowed shadow-none"
+                                    : "bg-[#1814F3] hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20"
+                            )}
                         >
                             {isLoading ? (
                                 <div className="flex items-center gap-2">
                                     <Loader2 className="animate-spin" /> Processing...
                                 </div>
-                            ) : isRestricted ? (
+                            ) : isDisabled ? (
                                 <div className="flex items-center gap-2">
                                     <Ban size={20} /> Transfer Disabled
                                 </div>
