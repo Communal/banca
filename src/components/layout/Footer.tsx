@@ -17,8 +17,8 @@ const Footer = () => {
 
   const contactInfo = [
     { icon: Mail, text: "hello@gmail.com" },
-    { icon: Phone, text: "+234 6677 9999" },
-    { icon: MapPin, text: "Somewhere in the World" },
+    // { icon: Phone, text: "+234 6677 9999" },
+    // { icon: MapPin, text: "Somewhere in the World" },
   ];
 
   return (

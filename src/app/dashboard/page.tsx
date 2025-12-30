@@ -44,7 +44,7 @@ export default function DashboardPage() {
         Desktop: 3 Columns (Charts Left, Cards Right via 'order' utility)
       */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-        
+
         {/* --- Right Column (Cards & Transactions) --- */}
         {/* Mobile: Appears 1st. Desktop: Moved to right (order-2) */}
         <div className="xl:col-span-1 xl:order-2 flex flex-col gap-8">
@@ -80,9 +80,9 @@ export default function DashboardPage() {
 
       {/* Row 2: Quick Transfer & Balance History */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-        <div className="xl:col-span-1">
+        {/* <div className="xl:col-span-1">
           <QuickTransfer />
-        </div>
+        </div> */}
         <div className="xl:col-span-2">
           <BalanceHistory />
         </div>

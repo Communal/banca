@@ -20,14 +20,17 @@ interface TransactionsResponse {
     };
 }
 
-export const useTransactions = (page: number, filter: "all" | "income" | "expense") => {
+export const useTransactions = (
+    page: number,
+    filter: "all" | "income" | "expense",
+    limit: number = 10
+) => {
     return useQuery({
-        queryKey: ["transactions", page, filter],
+        queryKey: ["transactions", page, filter, limit],
         queryFn: async () => {
-            // Build query string
             const params = new URLSearchParams({
                 page: page.toString(),
-                limit: "10",
+                limit: limit.toString(),
                 filter,
             });
 
@@ -35,6 +38,6 @@ export const useTransactions = (page: number, filter: "all" | "income" | "expens
             if (!res.ok) throw new Error("Failed to fetch transactions");
             return res.json() as Promise<TransactionsResponse>;
         },
-        placeholderData: (previousData) => previousData, // Keep previous data while fetching new page (smooth transition)
+        placeholderData: (previousData) => previousData,
     });
 };
