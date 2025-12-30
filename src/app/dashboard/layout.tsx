@@ -1,26 +1,30 @@
+"use client";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { MobileHeader } from "@/components/dashboard/MobileHeader";
 import Image from "next/image";
 import { AccountStatusBanner } from "@/components/dashboard/AccountStatusBanner";
+import { useDashboardStore } from "@/store/useDashboardStore";
 
 export default function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { pageTitle } = useDashboardStore();
+
   return (
     <div className="min-h-screen bg-white">
       <Sidebar />
 
-      {/* Main Content: 
-          md:ml-64 pushes content to the right on desktop to make room for fixed sidebar 
-      */}
+      {/* Main Content */}
       <div className="md:ml-64 min-h-screen flex flex-col">
         {/* Desktop Header (Hidden on Mobile) */}
         <header className="hidden md:flex justify-between items-center py-6 px-10 bg-white border-b mb-8">
-          <h1 className="text-2xl font-bold text-[#343C6A]">Overview</h1>
+          {/* Dynamic Page Title */}
+          <h1 className="text-2xl font-bold text-[#343C6A]">{pageTitle}</h1>
+
           <div className="flex items-center gap-4">
-            {/* Search Bar & Profile Pic would go here */}
+            {/* Search Bar & Profile Pic */}
             <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
               <Image
                 src="/avatars/user.jpg"

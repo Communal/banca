@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react"; // Import useEffect
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -8,21 +9,18 @@ import {
   CreditCard,
   User,
   Settings,
-  PieChart,
   DollarSign,
   LogOut
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLogout } from "@/hooks/useLogout";
 
-
 const links = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
   { name: "Transactions", href: "/dashboard/transactions", icon: DollarSign },
   { name: "Accounts", href: "/dashboard/accounts", icon: User },
-  // { name: "Investments", href: "/dashboard/investments", icon: PieChart },
   { name: "Credit Cards", href: "/dashboard/cards", icon: CreditCard },
-  {name: "Transfers", href: "/dashboard/transfers", icon: DollarSign },
+  { name: "Transfers", href: "/dashboard/transfers", icon: DollarSign },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
@@ -30,7 +28,16 @@ export const Sidebar = () => {
   const pathname = usePathname();
   const logout = useLogout();
 
-  const { isMobileMenuOpen, closeMobileMenu } = useDashboardStore();
+  // Get setPageTitle from store
+  const { isMobileMenuOpen, closeMobileMenu, setPageTitle } = useDashboardStore();
+
+  // Effect to update page title on route change
+  useEffect(() => {
+    const activeLink = links.find((link) => link.href === pathname);
+    // If exact match found use that name, otherwise default to "Overview" or check strictly
+    // You might want to handle dynamic routes (like /dashboard/users/123) differently later
+    setPageTitle(activeLink ? activeLink.name : "Overview");
+  }, [pathname, setPageTitle]);
 
   return (
     <>
