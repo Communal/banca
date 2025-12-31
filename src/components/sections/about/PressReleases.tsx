@@ -4,7 +4,7 @@ const pressData = [
   {
     title:
       "Montedeiazzu Launches New Rewards Program to Enhance Customer Loyalty and Satisfaction",
-    location: "India",
+    location: "Italy",
     date: "24/12/2024",
     description:
       "Montedeiazzu is pleased to announce the introduction of our new Rewards Program, aimed at rewarding our loyal customers and enhancing their banking experience. The program offers exclusive benefits, discounts, and personalized offers tailored to individual customer preferences.",
@@ -13,7 +13,7 @@ const pressData = [
   {
     title:
       "Montedeiazzu Expands Branch Network with Opening of New Location in Chennai",
-    location: "India",
+    location: "Italy",
     date: "12/01/2024",
     description:
       "Montedeiazzu is excited to announce the grand opening of our newest branch in Chennai. This expansion is a testament to our continued commitment to serving our customers and providing them with convenient access to our comprehensive range of banking services.",
@@ -22,7 +22,7 @@ const pressData = [
   {
     title:
       "Montedeiazzu Partners with Local Nonprofit to Support Financial Education Initiatives",
-    location: "India",
+    location: "Italy",
     date: "20/12/2024",
     description:
       "Montedeiazzu has partnered with a local nonprofit organization to support financial education initiatives in the community. Through this partnership, we aim to empower individuals with the knowledge and tools they need to make informed financial decisions.",
@@ -31,7 +31,7 @@ const pressData = [
   {
     title:
       "Montedeiazzu Launches Sustainable Banking Initiative to Promote Environmental Responsibility",
-    location: "India",
+    location: "Italy",
     date: "28/12/2024",
     description:
       "Montedeiazzu is dedicated to promoting environmental responsibility and sustainability. We are launching a new initiative to support green projects and provide financing for eco-friendly businesses, reinforcing our commitment to a greener future.",

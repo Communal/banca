@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const jobsData = [
   {
     title: "Relationship Manager",
-    location: "New Delhi, India",
+    location: "Rome, Italy",
     department: "Retail Banking",
     about:
       "As a Relationship Manager at Montedeiazzu, you will be the primary point of contact for our valued customers. You will be responsible for building and maintaining strong relationships, understanding their financial needs, and providing personalized solutions. Your goal will be to enhance customer satisfaction and drive business growth through effective cross-selling and client retention strategies.",
@@ -19,7 +19,7 @@ const jobsData = [
   },
   {
     title: "Risk Analyst",
-    location: "Mumbai, India",
+    location: "Florence, Italy",
     department: "Risk Management",
     about:
       "As a Risk Analyst at Montedeiazzu, you will play a vital role in identifying, assessing, and mitigating risks across our operations. You will utilize advanced analytical tools and models to evaluate credit, market, and operational risks. Your insights will contribute to informed decision-making and ensure regulatory compliance, safeguarding the bank's financial stability and reputation.",
@@ -33,7 +33,7 @@ const jobsData = [
   },
   {
     title: "IT Security Specialist",
-    location: "Bangalore, India",
+    location: "Venice, Italy",
     department: "Information Technology",
     about:
       "As an IT Security Specialist at Montedeiazzu, you will be responsible for protecting our systems, networks, and data from cyber threats. You will implement security measures, monitor for vulnerabilities, and respond to security incidents. Your expertise will ensure the confidentiality, integrity, and availability of our critical information assets.",
