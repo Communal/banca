@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Facebook, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Facebook, Linkedin, Mail, Twitter } from "lucide-react";
+import Image from "next/image";
+
 
 const Footer = () => {
   const socialLinks = [
@@ -16,7 +18,7 @@ const Footer = () => {
   ];
 
   const contactInfo = [
-    { icon: Mail, text: "hello@gmail.com" },
+    { icon: Mail, text: "Use the chatbot on the screen" },
     // { icon: Phone, text: "+234 6677 9999" },
     // { icon: MapPin, text: "Somewhere in the World" },
   ];
@@ -25,18 +27,15 @@ const Footer = () => {
     <footer className="bg-brand-light pt-20 pb-10">
       <div className="container mx-auto px-4 flex flex-col items-center">
         {/* --- Logo Section --- */}
-        <div className="flex items-center gap-2 mb-8">
-          <div className="bg-brand-accent text-white p-1.5 rounded-sm flex items-center justify-center">
-            {/* CSS Logo Representation */}
-            <div className="w-5 h-5 relative">
-              <div className="absolute top-0 left-0 w-2.5 h-2.5 border-t-2 border-l-2 border-white"></div>
-              <div className="absolute bottom-0 right-0 w-2.5 h-2.5 border-b-2 border-r-2 border-white"></div>
-              <div className="absolute inset-0 m-auto w-1.5 h-1.5 bg-white rotate-45"></div>
-            </div>
-          </div>
-          <span className="font-bold text-xl text-brand-primary tracking-tight">
-            Montedeiazzu
-          </span>
+        <div className="flex items-center gap-2 p-8 mb-4">
+          <Image
+            src="/images/web.png"
+            alt="Montedeiazzu Desktop Logo"
+            width={220}
+            height={200}
+            className="hidden md:block object-contain"
+            priority
+          />
         </div>
 
         {/* --- Navigation Links --- */}
@@ -62,7 +61,7 @@ const Footer = () => {
               key={index}
               className="flex items-center gap-2 text-brand-primary"
             >
-              <item.icon className="w-5 h-5 text-brand-accent fill-current" />
+              <item.icon className="w-5 h-5 text-brand-accent" />
               <span className="text-sm md:text-base">{item.text}</span>
             </div>
           ))}

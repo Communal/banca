@@ -3,7 +3,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-// --- Data Structure for Content ---
 const featuresData = {
   online: [
     {

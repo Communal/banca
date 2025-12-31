@@ -1,8 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Briefcase, PiggyBank, Wallet } from "lucide-react";
 
-const Products = () => {
-  const products = [
+const productsData = {
+  Individuals: [
     {
       icon: Wallet,
       title: "Checking Accounts",
@@ -13,12 +16,20 @@ const Products = () => {
       title: "Savings Accounts",
       desc: "Grow your money faster with high-yield savings options and automatic tools.",
     },
+  ],
+  Businesses: [
     {
       icon: Briefcase,
       title: "Business Banking",
       desc: "Scalable solutions for businesses of all sizes to manage finances efficiently.",
     },
-  ];
+  ],
+};
+
+type ProductTab = keyof typeof productsData;
+
+const Products = () => {
+  const [activeTab, setActiveTab] = useState<ProductTab>("Individuals");
 
   return (
     <section className="container mx-auto py-16 md:py-24">
@@ -31,22 +42,40 @@ const Products = () => {
             Discover a range of financial products tailored to your needs.
           </p>
         </div>
-        {/* Placeholder for the Toggle */}
+
+        {/* Toggle */}
         <div className="bg-white p-1 rounded-full border flex">
           <Button
+            type="button"
             variant="ghost"
-            className="rounded-full bg-brand-accent text-white"
+            onClick={() => setActiveTab("Individuals")}
+            className={`rounded-full px-6 ${
+              activeTab === "Individuals"
+                ? "bg-brand-accent text-white"
+                : "text-gray-600"
+            }`}
           >
             For Individuals
           </Button>
-          <Button variant="ghost" className="rounded-full">
+
+          <Button
+            type="button"
+            variant="ghost"
+            onClick={() => setActiveTab("Businesses")}
+            className={`rounded-full px-6 ${
+              activeTab === "Businesses"
+                ? "bg-brand-accent text-white"
+                : "text-gray-600"
+            }`}
+          >
             For Businesses
           </Button>
         </div>
       </div>
 
+      {/* Products Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {products.map((item, index) => (
+        {productsData[activeTab].map((item, index) => (
           <div
             key={index}
             className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center space-y-4"
