@@ -20,10 +20,12 @@ export async function createSession(payload: { userId: string; role: string }) {
         .sign(SECRET_KEY);
 
     const cookieStore = await cookies();
+    const isProduction = process.env.NODE_ENV === "production";
+    const secureCookie = isProduction;
 
     cookieStore.set("session", session, {
         httpOnly: true,
-        secure: false,
+        secure: secureCookie,
         expires: new Date(Date.now() + ONE_DAY),
         sameSite: "lax",
         path: "/",
@@ -37,20 +39,16 @@ export async function getSession() {
     if (!session) return null;
 
     try {
-        // 1. Verify the Token Signature
         const { payload } = await jwtVerify(session, SECRET_KEY, {
             algorithms: ["HS256"],
         });
 
-        // 2. [NEW STEP] Verify User Exists in Database
-        // This prevents "deleted" users from accessing the app using an old token
         const user = await db.query.users.findFirst({
             where: eq(users.id, payload.userId as string),
-            columns: { id: true, role: true } // Only fetch what we need
+            columns: { id: true, role: true }
         });
 
         if (!user) {
-            // Token is valid, but user is gone. Destroy the cookie.
             await logout();
             return null;
         }
