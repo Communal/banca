@@ -30,15 +30,15 @@ export const AdminSidebar = ({
 
   const links = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/admin/accounts", label: "Edit Accounts", icon: Users },
+    // { href: "/admin/accounts", label: "Edit Accounts", icon: Users },
     // {
     //   href: "/admin/transactions",
     //   label: "Edit Transactions",
     //   icon: CreditCard,
     // },
     // { href: "/admin/loans", label: "Loans", icon: Banknote },
-    { href: "/admin/services", label: "Services", icon: Wrench },
-    { href: "/admin/settings", label: "Settings", icon: Settings },
+    // { href: "/admin/services", label: "Services", icon: Wrench },
+    // { href: "/admin/settings", label: "Settings", icon: Settings },
   ];
 
   return (
