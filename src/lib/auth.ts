@@ -1,7 +1,7 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-import { db } from "@/db"; // Import DB
-import { users } from "@/db/schema"; // Import users schema
+import { db } from "@/db";
+import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
 
 // Validate Environment Variable
@@ -23,7 +23,7 @@ export async function createSession(payload: { userId: string; role: string }) {
 
     cookieStore.set("session", session, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: false,
         expires: new Date(Date.now() + ONE_DAY),
         sameSite: "lax",
         path: "/",
