@@ -29,6 +29,8 @@ export default function AdminLoginPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+        credentials: "include",
+
       });
 
       const result = await response.json();
@@ -39,7 +41,7 @@ export default function AdminLoginPage() {
       queryClient.invalidateQueries({ queryKey: ["me"] });
       // 2. Success Toast
       toast.success("Welcome back, Admin!");
-      router.push("/admin/dashboard");
+      window.location.href = "/admin/dashboard";
     },
     onError: (error: Error) => {
       // 3. Error Toast
