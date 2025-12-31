@@ -13,6 +13,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import { Pencil, AlertTriangle } from "lucide-react";
+import { CURRENCIES } from "@/lib/currency"; // <--- Import Currencies
 
 interface UserProfileFormProps {
     initialData?: any;
@@ -30,6 +31,7 @@ export const UserProfileForm = ({ initialData, onSubmit, isSaving }: UserProfile
                 ...initialData,
                 status: initialData.status || "active",
                 statusReason: initialData.statusReason || "",
+                currency: initialData.currency || "USD", // Ensure currency has a default
             });
         }
     }, [initialData]);
@@ -42,6 +44,11 @@ export const UserProfileForm = ({ initialData, onSubmit, isSaving }: UserProfile
 
     const handleStatusChange = (value: string) => {
         setFormData({ ...formData, status: value });
+    };
+
+    // Handler for currency select
+    const handleCurrencyChange = (value: string) => {
+        setFormData({ ...formData, currency: value });
     };
 
     const handleSubmit = () => {
@@ -113,12 +120,31 @@ export const UserProfileForm = ({ initialData, onSubmit, isSaving }: UserProfile
                             <label className="text-[#343C6A] text-sm font-medium">Date of Birth</label>
                             <Input
                                 name="dateOfBirth"
-                                type="date" // Ensures date picker triggers
+                                type="date"
                                 value={formData.dateOfBirth || ""}
                                 onChange={handleChange}
                                 className="h-12 rounded-2xl border-gray-200 text-[#718EBF]"
                             />
                         </div>
+
+                        {/* --- CURRENCY SELECTOR (Re-added) --- */}
+                        <div className="space-y-2">
+                            <label className="text-[#343C6A] text-sm font-medium">Account Currency</label>
+                            <Select value={formData.currency} onValueChange={handleCurrencyChange}>
+                                <SelectTrigger className="h-12 rounded-2xl border-gray-200 text-[#718EBF]">
+                                    <SelectValue placeholder="Select Currency" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {CURRENCIES.map((c) => (
+                                        <SelectItem key={c.value} value={c.value}>
+                                            {c.label} ({c.symbol})
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                        </div>
+                        {/* ------------------------------------- */}
+
                         <div className="space-y-2">
                             <label className="text-[#343C6A] text-sm font-medium">Present Address</label>
                             <Input

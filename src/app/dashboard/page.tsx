@@ -2,7 +2,7 @@
 import { WeeklyActivity } from "@/components/dashboard/WeeklyActivityChart";
 import { ExpenseStatistics } from "@/components/dashboard/ExpenseStatistics";
 import { RecentTransactions } from "@/components/dashboard/RecentTransactions";
-import { QuickTransfer } from "@/components/dashboard/QuickTransfer";
+// import { QuickTransfer } from "@/components/dashboard/QuickTransfer";
 import { BalanceHistory } from "@/components/dashboard/BalanceHistory";
 import { useCards } from "@/hooks/useCards";
 import { CreditCard } from "@/components/dashboard/cards/CreditCard";

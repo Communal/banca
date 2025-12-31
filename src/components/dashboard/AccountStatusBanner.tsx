@@ -2,11 +2,17 @@
 
 import { ShieldAlert, AlertTriangle } from "lucide-react";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
-import { Button } from "@/components/ui/button";
 
 export const AccountStatusBanner = () => {
-    const { data: user, isLoading } = useCurrentUser();
+    // 1. Rename 'data' to 'authData' to avoid confusion
+    const { data: authData, isLoading } = useCurrentUser();
 
+    // 2. Extract the actual user object from the response wrapper
+    // The API returns { user: { ... } }, so we need to access authData.user
+    const user = authData?.user;
+
+    // 3. Logic Check
+    // If loading, no user found, or user is active -> Don't show banner
     if (isLoading || !user || user.status === "active") return null;
 
     const isBlocked = user.status === "blocked";
@@ -32,9 +38,9 @@ export const AccountStatusBanner = () => {
     return (
         <div className="w-full mb-4 md:mb-8 animate-in slide-in-from-top-4 duration-500">
             <div
-                className={`bg-white rounded-xl md:rounded-4xl
-                p-4 md:p-8 shadow-sm border ${config.bgBorder}
-                flex flex-col md:flex-row gap-4 md:gap-6
+                className={`bg-white rounded-xl md:rounded-4xl 
+                p-4 md:p-8 shadow-sm border ${config.bgBorder} 
+                flex flex-col md:flex-row gap-4 md:gap-6 
                 relative overflow-hidden`}
             >
                 {/* Decorative Status Line */}
@@ -42,8 +48,8 @@ export const AccountStatusBanner = () => {
 
                 {/* Icon */}
                 <div
-                    className={`h-10 w-10 md:h-14 md:w-14
-                    rounded-full ${config.bgCircle}
+                    className={`h-10 w-10 md:h-14 md:w-14 
+                    rounded-full ${config.bgCircle} 
                     flex items-center justify-center shrink-0`}
                 >
                     {config.icon}
@@ -64,26 +70,6 @@ export const AccountStatusBanner = () => {
                         </p>
                     </div>
                 </div>
-
-                {/* Action Button */}
-                {/* <div className="w-full md:w-auto pt-2 md:pt-0">
-                    <Button
-                        className="
-                            w-full md:w-auto
-                            h-10 md:h-12
-                            px-4 md:px-8
-                            text-sm md:text-base
-                            rounded-lg md:rounded-xl
-                            bg-[#1814F3] hover:bg-blue-700 text-white
-                            font-medium shadow-lg shadow-blue-500/20
-                        "
-                        onClick={() =>
-                            (window.location.href = "mailto:support@yourbank.com")
-                        }
-                    >
-                        Contact Support
-                    </Button>
-                </div> */}
             </div>
         </div>
     );
