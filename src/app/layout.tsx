@@ -7,6 +7,7 @@ import TawkToChat from "@/components/TawkToChat";
 const lexend = Lexend({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://montedeiazzu.it"),
   title: "Montedeiazzu — Empowering Your Financial Journey",
   description:
     "Modern banking solutions. Secure, fast, and modern banking for individuals and businesses.",

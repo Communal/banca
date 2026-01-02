@@ -6,7 +6,7 @@ export function makeMetadata({
   title,
   description,
   pathname = "/",
-  image = "/images/og-default.jpg",
+  image = "/images/web.png",
 }: {
   title: string;
   description: string;
