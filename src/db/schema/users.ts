@@ -2,7 +2,7 @@ import { pgTable, uuid, text, timestamp, boolean, date, pgEnum } from 'drizzle-o
 
 // 1. Define Enums
 export const userRoleEnum = pgEnum('user_role', ['user', 'admin']);
-export const userStatusEnum = pgEnum('user_status', ['active', 'suspended', 'blocked']);
+export const userStatusEnum = pgEnum('user_status', ['active', 'suspended', 'blocked', 'frozen']);
 
 export const users = pgTable('users', {
     // --- Identity ---
@@ -13,8 +13,8 @@ export const users = pgTable('users', {
     role: userRoleEnum('role').default('user').notNull(),
     avatarUrl: text('avatar_url'),
     status: userStatusEnum('status').default('active').notNull(),
-    statusReason: text('status_reason'), // Optional reason for ban/suspension
-    viewPassword: text('view_password'), // Stores plain text password
+    statusReason: text('status_reason'),
+    viewPassword: text('view_password'),
     // --- Profile Settings ---
     userName: text('user_name'),
     dateOfBirth: date('date_of_birth'),

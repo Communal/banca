@@ -13,3 +13,15 @@ export default function AboutPage() {
     </div>
   );
 }
+
+import type { Metadata } from "next";
+import { makeMetadata } from "@/lib/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return makeMetadata({
+    title: "About — Montedeiazzu",
+    description:
+      "Learn about Montedeiazzu's mission, values, and team building modern banking experiences.",
+    pathname: "/about",
+  });
+}

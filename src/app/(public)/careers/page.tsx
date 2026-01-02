@@ -17,3 +17,15 @@ export default function CareersPage() {
     </div>
   );
 }
+
+import type { Metadata } from "next";
+import { makeMetadata } from "@/lib/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return makeMetadata({
+    title: "Careers — Montedeiazzu",
+    description:
+      "Join Montedeiazzu — see open roles, benefits, and how we build modern financial products.",
+    pathname: "/careers",
+  });
+}

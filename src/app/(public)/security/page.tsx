@@ -11,3 +11,15 @@ export default function SecurityPage() {
     </div>
   );
 }
+
+import type { Metadata } from "next";
+import { makeMetadata } from "@/lib/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return makeMetadata({
+    title: "Security — Montedeiazzu",
+    description:
+      "How Montedeiazzu protects your accounts and data with industry-leading security measures.",
+    pathname: "/security",
+  });
+}

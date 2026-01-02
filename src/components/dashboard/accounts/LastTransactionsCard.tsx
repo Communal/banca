@@ -1,8 +1,9 @@
 "use client";
+
 import { Settings, User, RefreshCw, CreditCard } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { formatCurrency } from "@/lib/currency"; // <--- IMPORT
-import { useCurrentUser } from "@/hooks/useCurrentUser"; // <--- IMPORT HOOK
+import { formatCurrency } from "@/lib/currency";
+import { useCurrentUser } from "@/hooks/useCurrentUser";
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString("en-US", {
@@ -17,6 +18,7 @@ const IconMap: any = {
   service: <Settings size={20} className="text-[#1814F3]" />,
   transfer: <User size={20} className="text-[#FF82AC]" />,
 };
+
 const BgMap: any = {
   shopping: "bg-[#E7EDFF]",
   service: "bg-[#E7EDFF]",
@@ -28,9 +30,10 @@ export const LastTransactionsCard = ({
 }: {
   transactions: any[];
 }) => {
-  // Fetch user preference
-  const { data: user } = useCurrentUser();
-  const currencyCode = user?.currency || "USD";
+  // 1. Fetch user preference correctly
+  // The hook returns { data: { user: { ... } } }
+  const { data: authData } = useCurrentUser();
+  const currencyCode = authData?.user?.currency || "USD";
 
   return (
     <div className="bg-white p-6 rounded-3xl shadow-sm h-full">
@@ -73,8 +76,9 @@ export const LastTransactionsCard = ({
                 Number(tx.amount) > 0 ? "text-[#41D4A8]" : "text-[#FE5C73]"
               )}
             >
-              {Number(tx.amount) > 0 ? "+" : ""}
-              {formatCurrency(tx.amount, currencyCode)}
+              {/* 2. Consistent Sign & Currency Formatting */}
+              {Number(tx.amount) > 0 ? "+" : "-"}
+              {formatCurrency(Math.abs(Number(tx.amount)), currencyCode)}
             </span>
           </div>
         ))}

@@ -189,3 +189,15 @@ export default function ProductsPage() {
     </div>
   );
 }
+
+import type { Metadata } from "next";
+import { makeMetadata } from "@/lib/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return makeMetadata({
+    title: "Products — Montedeiazzu",
+    description:
+      "Explore Montedeiazzu's product suite: checking, savings, loans, and business banking solutions.",
+    pathname: "/products",
+  });
+}

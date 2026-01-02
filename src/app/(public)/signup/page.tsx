@@ -15,3 +15,14 @@ export default function SignUpPage() {
     </div>
   );
 }
+
+import type { Metadata } from "next";
+import { makeMetadata } from "@/lib/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return makeMetadata({
+    title: "Sign Up — Montedeiazzu",
+    description: "Create an account with Montedeiazzu to get started with our banking products.",
+    pathname: "/signup",
+  });
+}

@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const faqData = [
+export const faqData = [
   {
     question: "How do I open an account with Montedeiazzu?",
     answer:

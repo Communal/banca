@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
-import { Pencil, AlertTriangle } from "lucide-react";
-import { CURRENCIES } from "@/lib/currency"; // <--- Import Currencies
+import { Pencil, AlertTriangle, Snowflake } from "lucide-react";
+import { CURRENCIES } from "@/lib/currency";
 
 interface UserProfileFormProps {
     initialData?: any;
@@ -215,6 +215,7 @@ export const UserProfileForm = ({ initialData, onSubmit, isSaving }: UserProfile
                             <SelectContent>
                                 <SelectItem value="active">Active</SelectItem>
                                 <SelectItem value="suspended">Suspended (Temporary)</SelectItem>
+                                <SelectItem value="frozen">Frozen (Indefinite)</SelectItem>
                                 <SelectItem value="blocked">Blocked (Permanent)</SelectItem>
                             </SelectContent>
                         </Select>

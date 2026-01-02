@@ -14,3 +14,14 @@ export default function LoginPage() {
     </div>
   );
 }
+
+import type { Metadata } from "next";
+import { makeMetadata } from "@/lib/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return makeMetadata({
+    title: "Log In — Montedeiazzu",
+    description: "Log in to your Montedeiazzu account to manage finances securely.",
+    pathname: "/login",
+  });
+}
