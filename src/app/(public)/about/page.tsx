@@ -1,7 +1,18 @@
 import AboutHero from "@/components/sections/about/AboutHero";
 import MissionSection from "@/components/sections/about/MissionSection";
-import PressReleases from "@/components/sections/about/PressReleases"; // Created in previous steps
-import CTABanner from "@/components/sections/CTABanner"; // Reused from Home
+import PressReleases from "@/components/sections/about/PressReleases";
+import CTABanner from "@/components/sections/CTABanner";
+import type { Metadata } from "next";
+import { makeMetadata } from "@/lib/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return makeMetadata({
+    title: "About — Montedeiazzu",
+    description:
+      "Learn about Montedeiazzu's mission, values, and team building modern banking experiences.",
+    pathname: "/about",
+  });
+}
 
 export default function AboutPage() {
   return (
@@ -14,14 +25,3 @@ export default function AboutPage() {
   );
 }
 
-import type { Metadata } from "next";
-import { makeMetadata } from "@/lib/seo";
-
-export async function generateMetadata(): Promise<Metadata> {
-  return makeMetadata({
-    title: "About — Montedeiazzu",
-    description:
-      "Learn about Montedeiazzu's mission, values, and team building modern banking experiences.",
-    pathname: "/about",
-  });
-}
