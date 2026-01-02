@@ -22,7 +22,7 @@ const MyCardsCarousel = () => {
   };
 
   if (isLoading)
-    return <div className="h-[210px] w-full bg-gray-200 rounded-[2rem] animate-pulse" />;
+    return <div className="h-52.5 w-full bg-gray-200 rounded-[2rem] animate-pulse" />;
 
   if (!cards || cards.length === 0) return null;
 
@@ -46,8 +46,7 @@ const MyCardsCarousel = () => {
           <CreditCard
             key={card.id}
             card={card}
-            variant={index % 2 === 0 ? "blue" : "white"}
-            className="min-w-[320px] h-[210px] shrink-0"
+            className="min-w-[320px] h-52.5 shrink-0"
           />
         ))}
       </div>

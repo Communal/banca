@@ -22,7 +22,13 @@ export const CardDetailsDialog = ({
 }: CardDetailsDialogProps) => {
   const { data: card, isLoading } = useCardDetails(cardId);
 
-  const logoSrc = card?.cardProvider === 'visa' ? '/icons/visa.png' : '/icons/mastercard.png';
+  const isMastercard = card?.cardProvider === 'mastercard';
+  const logoSrc = isMastercard ? '/icons/mastercard.png' : '/icons/visa.png';
+
+  // Apply same logic: Blue for Visa, Black for Mastercard
+  const bgClasses = isMastercard
+    ? "bg-linear-to-r from-[#5B5A6F] to-[#000000]"
+    : "bg-linear-to-r from-[#2D60FF] to-[#539BFF]";
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -37,7 +43,9 @@ export const CardDetailsDialog = ({
           <div className="h-40 animate-pulse bg-gray-100 rounded-xl" />
         ) : card ? (
           <div className="space-y-6">
-            <div className="bg-linear-to-r from-[#2D60FF] to-[#539BFF] p-6 rounded-[2rem] text-white shadow-lg relative overflow-hidden">
+
+            {/* Dynamic Card Visual */}
+            <div className={`${bgClasses} p-6 rounded-[2rem] text-white shadow-lg relative overflow-hidden`}>
 
               <div className="flex justify-between items-start mb-8">
                 <div>
