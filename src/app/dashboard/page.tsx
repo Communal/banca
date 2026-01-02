@@ -31,7 +31,7 @@ const MyPrimaryCard = () => {
 
   return (
     <div className="w-full h-[210px]">
-      <CreditCard card={primaryCard} variant="blue" className="w-full h-full" />
+      <CreditCard card={primaryCard} className="w-full h-full" />
     </div>
   );
 };
