@@ -11,9 +11,6 @@ export const metadata: Metadata = {
   title: "Montedeiazzu — Empowering Your Financial Journey",
   description:
     "Modern banking solutions. Secure, fast, and modern banking for individuals and businesses.",
-  icons: {
-    icon: "/images/icon.png",
-  },
   openGraph: {
     title: "Montedeiazzu — Empowering Your Financial Journey",
     description:
