@@ -11,7 +11,7 @@ export default function PublicLayout({
       <Navbar />
 
       {/* This padding logic was moved from the root layout to here */}
-      <main className="min-h-screen pt-32 px-4 md:px-8 w-full max-w-[100vw] overflow-x-hidden">
+      <main className="min-h-screen pt-32py-16 px-4 md:px-12 w-full max-w-[100vw] overflow-x-hidden">
         {children}
       </main>
 

@@ -74,7 +74,7 @@ const featuresData = {
 
 const Features = () => {
   return (
-    <section className="py-20 bg-brand-light">
+    <section className="text-white py-6 px-4 md:px-12 bg-brand-light">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center md:text-left md:max-w-4xl mb-12 space-y-4">

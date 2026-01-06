@@ -32,7 +32,7 @@ const Products = () => {
   const [activeTab, setActiveTab] = useState<ProductTab>("Individuals");
 
   return (
-    <section className="container mx-auto py-16 md:py-24">
+    <section className="container mx-auto py-6 px-4 md:px-12">
       <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
         <div>
           <h2 className="text-3xl md:text-5xl font-bold mb-4">

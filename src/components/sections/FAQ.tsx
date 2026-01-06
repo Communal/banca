@@ -1,5 +1,3 @@
-import { ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export const faqData = [
   {
@@ -26,7 +24,7 @@ export const faqData = [
 
 const FAQ = () => {
   return (
-    <section className="py-20 bg-brand-light">
+    <section className="text-white py-6 px-4 md:px-12 bg-brand-light">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="text-center mb-12 md:mb-16 space-y-4">

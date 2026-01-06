@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 // --- Data ---
 const testimonialsData = [
@@ -11,31 +12,35 @@ const testimonialsData = [
     quote:
       "Montedeiazzu has been my trusted financial partner for years. Their personalized service and innovative digital banking solutions have made managing my finances a breeze.",
     author: "Sara T",
+    image: "/images/testimonial-1.jpg",
   },
   {
     type: "Businesses",
     quote:
       "I recently started my own business, and Montedeiazzu has been instrumental in helping me set up my business accounts and secure the financing I needed. Their expert guidance and tailored solutions have been invaluable.",
     author: "John D",
+    image: "/images/testimonial-2.jpg",
   },
   {
     type: "Individuals",
     quote:
       "I love the convenience of Montedeiazzu's mobile banking app. It allows me to stay on top of my finances and make transactions on the go. The app is user-friendly and secure, giving me peace of mind.",
     author: "Emily G",
+    image: "/images/testimonial-3.jpg",
   },
-  // Add more business testimonials for a complete set
   {
     type: "Businesses",
     quote:
       "Montedeiazzu's business tools have streamlined our payroll and invoicing, saving us countless hours. We can now focus on growing our company.",
     author: "Michael R",
+    image: "/images/testimonial-1.jpg",
   },
   {
     type: "Businesses",
     quote:
       "The business loan process was incredibly smooth. The team at Montedeiazzu understood our vision and provided the capital we needed to expand our operations.",
     author: "David K",
+    image: "/images/testimonial-2.jpg",
   },
 ];
 
@@ -43,19 +48,35 @@ const testimonialsData = [
 const TestimonialCard = ({
   quote,
   author,
+  image,
 }: {
   quote: string;
   author: string;
+  image: string;
 }) => (
-  <div className="flex flex-col items-center text-center space-y-8">
-    {/* Quote Icon with Lines */}
+  <div className="flex flex-col items-center text-center space-y-6 w-full">
+
+    {/* Image Container with Side Lines */}
     <div className="relative w-full flex justify-center items-center">
+      {/* Left Line */}
       <div className="h-px bg-gray-300 w-1/4 md:w-1/3 absolute left-0"></div>
-      <Quote className="text-brand-accent w-10 h-10 fill-current z-10 bg-brand-light px-1" />
+
+      {/* Image Wrapper */}
+      <div className="relative w-16 h-16 md:w-20 md:h-20 z-10 bg-brand-light p-1 rounded-full">
+        <Image
+          src={image}
+          alt={author}
+          fill
+          className="rounded-full object-cover border-2 border-brand-accent shadow-sm"
+        />
+      </div>
+
+      {/* Right Line */}
       <div className="h-px bg-gray-300 w-1/4 md:w-1/3 absolute right-0"></div>
     </div>
+
     <p className="text-gray-700 leading-relaxed text-lg md:text-xl max-w-2xl">
-      {quote}
+      "{quote}"
     </p>
     <span className="font-bold text-brand-accent text-xl">{author}</span>
   </div>
@@ -83,7 +104,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-20 bg-brand-light">
+    <section className="text-white py-6 px-4 md:px-12 bg-brand-light">
       <div className="container mx-auto px-4">
         {/* --- Header & Toggle Section --- */}
         <div className="flex flex-col lg:flex-row justify-between items-center gap-8 mb-16">
@@ -106,11 +127,10 @@ const Testimonials = () => {
                 setActiveTab("Individuals");
                 setCurrentIndex(0);
               }}
-              className={`px-8 py-3 rounded-full text-base font-medium transition-colors ${
-                activeTab === "Individuals"
+              className={`px-8 py-3 rounded-full text-base font-medium transition-colors ${activeTab === "Individuals"
                   ? "bg-brand-accent text-white"
                   : "text-gray-600 hover:text-brand-primary"
-              }`}
+                }`}
             >
               For Individuals
             </button>
@@ -119,11 +139,10 @@ const Testimonials = () => {
                 setActiveTab("Businesses");
                 setCurrentIndex(0);
               }}
-              className={`px-8 py-3 rounded-full text-base font-medium transition-colors ${
-                activeTab === "Businesses"
+              className={`px-8 py-3 rounded-full text-base font-medium transition-colors ${activeTab === "Businesses"
                   ? "bg-brand-accent text-white"
                   : "text-gray-600 hover:text-brand-primary"
-              }`}
+                }`}
             >
               For Businesses
             </button>
@@ -161,7 +180,7 @@ const Testimonials = () => {
 
         {/* Desktop View (Grid) */}
         <div className="hidden lg:grid grid-cols-3 gap-12 items-start relative">
-          {/* Desktop Navigation Arrows (Optional, based on image) */}
+          {/* Desktop Navigation Arrows */}
           <div className="absolute top-1/2 -left-20 transform -translate-y-1/2 z-10">
             <Button
               variant="outline"
