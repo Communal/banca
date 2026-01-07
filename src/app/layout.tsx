@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Lexend } from "next/font/google";
+import Script from "next/script"; // Import the Script component
 import "./globals.css";
 import Providers from "./providers";
 import TawkToChat from "@/components/TawkToChat";
@@ -57,6 +58,12 @@ export default function RootLayout({
           {children}
           <TawkToChat />
         </Providers>
+
+        {/* ConveyThis Translator */}
+        <Script
+          src="https://cdn.conveythis.com/javascript/conveythis.js?api_key=pub_3092cef0c2460724b162e8999ad4cd91"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
