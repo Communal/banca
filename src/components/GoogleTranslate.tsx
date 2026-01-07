@@ -15,25 +15,34 @@ export default function GoogleTranslate() {
             new window.google.translate.TranslateElement(
                 {
                     pageLanguage: "en",
-                    autoDisplay: false, // Don't show the banner
+                    autoDisplay: false,
                 },
                 "google_translate_element"
             );
         };
 
         // 2. Check for existing language cookie
-        // Cookie format is usually: googtrans=/source/target (e.g., /en/it)
         const match = document.cookie.match(/googtrans=\/en\/([a-z]{2})/);
+
         if (match) {
+            // A. If cookie exists, respect it (even if it is English)
             setLang(match[1]);
         } else {
-            // --- FORCE ITALIAN DEFAULT FOR NEW USERS ---
-            // Uncomment the lines below to make Italian the default for everyone
+            // B. No cookie found. Is this a new user?
+            const hasForcedLanguage = localStorage.getItem("has_forced_language");
 
-            document.cookie = "googtrans=/en/it; path=/";
-            setLang("it");
-            window.location.reload();
-
+            if (!hasForcedLanguage) {
+                // --- FIRST TIME USER: FORCE ITALIAN ---
+                document.cookie = "googtrans=/en/it; path=/";
+                localStorage.setItem("has_forced_language", "true"); // Mark as done
+                setLang("it");
+                window.location.reload();
+            } else {
+                // --- RETURNING USER: DEFAULT TO ENGLISH ---
+                // If they have no cookie but HAVE visited before, it means 
+                // they likely switched back to English (Original).
+                setLang("en");
+            }
         }
     }, []);
 
@@ -41,20 +50,20 @@ export default function GoogleTranslate() {
         const newLang = e.target.value;
         setLang(newLang);
 
-        // 3. Set the special Google Cookie to trigger translation
-        // Format: /sourceLang/targetLang
+        // 3. Set the cookie. 
+        // Note: For English, we set /en/en. 
+        // If Google deletes this cookie automatically, our localStorage check 
+        // above ensures we don't accidentally force Italian again.
         document.cookie = `googtrans=/en/${newLang}; path=/`;
 
-        // 4. Reload page to apply the translation
+        // 4. Reload page
         window.location.reload();
     };
 
     return (
         <div className="relative flex items-center bg-gray-100 rounded-full px-3 py-2 gap-2 border border-transparent hover:border-brand-accent transition-all group">
-            {/* Icon */}
             <Globe className="w-4 h-4 text-gray-500 group-hover:text-brand-accent" />
 
-            {/* Beautiful Custom Dropdown */}
             <select
                 value={lang}
                 onChange={handleLanguageChange}
@@ -68,10 +77,8 @@ export default function GoogleTranslate() {
                 <option value="de">Deutsch</option>
             </select>
 
-            {/* Hidden Google Widget (Must exist for logic to work) */}
             <div id="google_translate_element" className="hidden" />
 
-            {/* Google Script */}
             <Script
                 src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
                 strategy="afterInteractive"
