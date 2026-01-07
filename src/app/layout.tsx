@@ -1,14 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Lexend } from "next/font/google";
-import Script from "next/script"; // Import the Script component
 import "./globals.css";
 import Providers from "./providers";
 import TawkToChat from "@/components/TawkToChat";
+import GoogleTranslate from "@/components/GoogleTranslate";
 
 const lexend = Lexend({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://montedeiazzu.it"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://montedeiazzu.it"
+  ),
   title: "Montedeiazzu — Empowering Your Financial Journey",
   description:
     "Modern banking solutions. Secure, fast, and modern banking for individuals and businesses.",
@@ -46,24 +48,21 @@ export const viewport: Viewport = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en" className="overflow-x-hidden">
       <body
         className={`${lexend.className} bg-brand-light antialiased overflow-x-hidden`}
       >
+        {/* ✅ Load Google Translate ONCE globally */}
+        <GoogleTranslate />
+
         <Providers>
           {children}
           <TawkToChat />
         </Providers>
-
-        {/* ConveyThis Translator */}
-        <Script
-          src="https://cdn.conveythis.com/javascript/conveythis.js?api_key=pub_3092cef0c2460724b162e8999ad4cd91"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );

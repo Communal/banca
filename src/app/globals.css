@@ -4,9 +4,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-brand-primary: #1F2937;
-  --color-brand-accent: #396AFF;
-  --color-brand-light: #F5F8FF;
+  --color-brand-primary: #1f2937;
+  --color-brand-accent: #396aff;
+  --color-brand-light: #f5f8ff;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -125,4 +125,37 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* --- GOOGLE TRANSLATE OVERRIDES --- */
+
+/* 1. Hide the top banner (Target both the old class and the new iframe) */
+.goog-te-banner-frame.skiptranslate,
+iframe.skiptranslate {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+}
+
+/* 2. Prevent the page from being pushed down */
+body {
+  top: 0px !important;
+  position: static !important; /* Essential to stop layout shifts */
+}
+
+/* 3. Hide the "Powered by Google" text and Logo */
+.goog-logo-link {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  color: transparent !important;
+  font-size: 0 !important;
+}
+
+/* 4. Style the Dropdown Text to remain visible */
+#google_translate_element select {
+  color: #4b5563; /* gray-600 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500;
 }

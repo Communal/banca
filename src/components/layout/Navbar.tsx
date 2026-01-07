@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image"; // <--- Imported Image
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,29 +21,21 @@ const Navbar = () => {
   ];
 
   const isActiveLink = (path: string) => pathname === path;
-
-  // Helper to close menu when a link is clicked (for mobile)
   const handleMobileLinkClick = () => setIsOpen(false);
 
   return (
     <div className="w-full fixed top-6 z-50 px-4">
       <nav className="mx-auto max-w-7xl bg-gray-100/80 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 flex items-center justify-between shadow-sm">
-
         {/* --- LOGO SECTION --- */}
         <Link href="/" className="flex items-center gap-2">
-          {/* 1. Desktop Logo (Hidden on mobile, visible on md+) */}
-          {/* Adjust width/height to match your image's aspect ratio */}
           <Image
             src="/images/web.png"
             alt="Montedeiazzu Desktop Logo"
             width={150}
             height={80}
             className="hidden md:block object-contain"
-            priority // Loads image immediately
+            priority
           />
-
-          {/* 2. Mobile Logo (Visible on mobile, hidden on md+) */}
-          {/* Create a 'mobile.png' in your public/images folder or change path */}
           <Image
             src="/images/wb2.png"
             alt="Montedeiazzu Mobile Logo"
@@ -73,7 +66,12 @@ const Navbar = () => {
         </div>
 
         {/* --- DESKTOP ACTIONS --- */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-4">
+          {/* Translator Added Here */}
+          {/* <LanguageSwitcher /> */}
+
+          <div className="h-6 w-px bg-gray-300 mx-2" /> {/* Divider */}
+
           <Link
             href="/signup"
             className="font-medium text-gray-700 hover:text-brand-accent"
@@ -88,7 +86,9 @@ const Navbar = () => {
         </div>
 
         {/* --- MOBILE TOGGLE --- */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-3">
+          {/* Optional: Show translator icon on mobile header too? 
+               For now, keeping it in the menu to save space. */}
           <Button
             size="icon"
             onClick={() => setIsOpen(!isOpen)}
@@ -119,12 +119,20 @@ const Navbar = () => {
                 </Link>
               );
             })}
+
             <hr className="border-gray-100" />
+
+            {/* Mobile Actions */}
             <div className="flex flex-col gap-3">
+              {/* Translator in Mobile Menu */}
+              <div className="flex justify-start py-2">
+                {/* <LanguageSwitcher /> */}
+              </div>
+
               <Link href="/signup" onClick={handleMobileLinkClick}>
                 <Button
                   variant="ghost"
-                  className="w-full justify-start text-lg"
+                  className="w-full justify-start text-lg px-0 hover:bg-transparent hover:text-brand-accent"
                 >
                   Sign Up
                 </Button>
