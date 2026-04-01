@@ -36,6 +36,9 @@ export default function EditUserProfile({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin-user", id] });
+      queryClient.invalidateQueries({ queryKey: ["current-user"] });
+      queryClient.invalidateQueries({ queryKey: ["me"] });
+
       toast.success("User profile updated successfully");
     },
     onError: () => toast.error("Failed to update profile"),

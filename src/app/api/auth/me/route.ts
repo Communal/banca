@@ -19,7 +19,10 @@ export async function GET() {
             role: true,
             avatarUrl: true,
             currency: true,
-            status: true
+            status: true,
+            pinOneActive: true,
+            pinTwoActive: true,
+            pinThreeActive: true,
         },
     });
 

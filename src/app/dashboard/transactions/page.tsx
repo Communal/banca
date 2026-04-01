@@ -67,8 +67,9 @@ export default function TransactionsPage() {
   const [filter, setFilter] = useState<"all" | "income" | "expense">("all");
   const [page, setPage] = useState(1);
 
-  // Fetch User Preference
-  const { data: user } = useCurrentUser();
+  // FIX: Robustly fetch User Preference
+  const { data: authData } = useCurrentUser();
+  const user = authData?.user || authData;
   const currencyCode = user?.currency || "USD";
 
   const { data, isLoading } = useTransactions(page, filter);
@@ -141,9 +142,9 @@ export default function TransactionsPage() {
                           amt > 0 ? "text-[#41D4A8]" : "text-[#FE5C73]"
                         )}
                       >
-                        {/* UPDATE: Use formatCurrency */}
-                        {amt > 0 ? "+" : ""}
-                        {formatCurrency(amt, currencyCode)}
+                        {/* Safe explicit sign with absolute value formatting */}
+                        {amt > 0 ? "+" : "-"}
+                        {formatCurrency(Math.abs(amt), currencyCode)}
                       </td>
                       <td className="py-4">
                         <button className="border border-[#123288] text-[#123288] rounded-full px-4 py-1.5 text-xs font-medium hover:bg-blue-50 transition-colors">
@@ -183,9 +184,9 @@ export default function TransactionsPage() {
                       amt > 0 ? "text-[#41D4A8]" : "text-[#FE5C73]"
                     )}
                   >
-                    {/* UPDATE: Use formatCurrency */}
-                    {amt > 0 ? "+" : ""}
-                    {formatCurrency(amt, currencyCode)}
+                    {/* Safe explicit sign with absolute value formatting */}
+                    {amt > 0 ? "+" : "-"}
+                    {formatCurrency(Math.abs(amt), currencyCode)}
                   </span>
                 </div>
               );

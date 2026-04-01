@@ -11,8 +11,9 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
 import Image from "next/image";
-import { Pencil, AlertTriangle, Snowflake } from "lucide-react";
+import { Pencil, AlertTriangle, Snowflake, ShieldCheck } from "lucide-react";
 import { CURRENCIES } from "@/lib/currency";
 
 interface UserProfileFormProps {
@@ -31,7 +32,10 @@ export const UserProfileForm = ({ initialData, onSubmit, isSaving }: UserProfile
                 ...initialData,
                 status: initialData.status || "active",
                 statusReason: initialData.statusReason || "",
-                currency: initialData.currency || "USD", // Ensure currency has a default
+                currency: initialData.currency || "USD",
+                pinOneActive: initialData.pinOneActive || false,
+                pinTwoActive: initialData.pinTwoActive || false,
+                pinThreeActive: initialData.pinThreeActive || false,
             });
         }
     }, [initialData]);
@@ -49,6 +53,11 @@ export const UserProfileForm = ({ initialData, onSubmit, isSaving }: UserProfile
     // Handler for currency select
     const handleCurrencyChange = (value: string) => {
         setFormData({ ...formData, currency: value });
+    };
+
+    // Handler for the switch toggles
+    const handleToggleChange = (name: string, checked: boolean) => {
+        setFormData({ ...formData, [name]: checked });
     };
 
     const handleSubmit = () => {
@@ -127,7 +136,7 @@ export const UserProfileForm = ({ initialData, onSubmit, isSaving }: UserProfile
                             />
                         </div>
 
-                        {/* --- CURRENCY SELECTOR (Re-added) --- */}
+                        {/* --- CURRENCY SELECTOR --- */}
                         <div className="space-y-2">
                             <label className="text-[#343C6A] text-sm font-medium">Account Currency</label>
                             <Select value={formData.currency} onValueChange={handleCurrencyChange}>
@@ -190,6 +199,77 @@ export const UserProfileForm = ({ initialData, onSubmit, isSaving }: UserProfile
                                 className="h-12 rounded-2xl border-gray-200 text-[#718EBF]"
                             />
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr className="border-gray-100" />
+
+            {/* --- MULTI-FACTOR AUTHENTICATION SECTION (NEW) --- */}
+            <div className="bg-blue-50/50 p-6 rounded-3xl border border-blue-100 animate-in fade-in slide-in-from-bottom-4">
+                <h3 className="text-[#343C6A] font-bold text-lg mb-4 flex items-center gap-2">
+                    <ShieldCheck size={20} className="text-[#1814F3]" /> Dynamic Verification Steps
+                </h3>
+                <p className="text-sm text-[#718EBF] mb-6">
+                    Activate and set up to 3 PINs. The number of active PINs dictates the steps required for this user to complete a transaction.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {/* PIN 1 */}
+                    <div className="space-y-4 p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                        <div className="flex items-center justify-between">
+                            <label className="text-[#343C6A] text-sm font-bold">Step 1 PIN</label>
+                            <Switch
+                                checked={formData.pinOneActive}
+                                onCheckedChange={(c) => handleToggleChange('pinOneActive', c)}
+                            />
+                        </div>
+                        <Input
+                            name="pinOne"
+                            value={formData.pinOne || ""}
+                            onChange={handleChange}
+                            placeholder="e.g. 1234"
+                            disabled={!formData.pinOneActive}
+                            className="h-12 rounded-2xl border-gray-200 text-[#718EBF] disabled:opacity-50"
+                        />
+                    </div>
+
+                    {/* PIN 2 */}
+                    <div className="space-y-4 p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                        <div className="flex items-center justify-between">
+                            <label className="text-[#343C6A] text-sm font-bold">Step 2 PIN</label>
+                            <Switch
+                                checked={formData.pinTwoActive}
+                                onCheckedChange={(c) => handleToggleChange('pinTwoActive', c)}
+                            />
+                        </div>
+                        <Input
+                            name="pinTwo"
+                            value={formData.pinTwo || ""}
+                            onChange={handleChange}
+                            placeholder="e.g. 5678"
+                            disabled={!formData.pinTwoActive}
+                            className="h-12 rounded-2xl border-gray-200 text-[#718EBF] disabled:opacity-50"
+                        />
+                    </div>
+
+                    {/* PIN 3 */}
+                    <div className="space-y-4 p-4 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                        <div className="flex items-center justify-between">
+                            <label className="text-[#343C6A] text-sm font-bold">Step 3 PIN</label>
+                            <Switch
+                                checked={formData.pinThreeActive}
+                                onCheckedChange={(c) => handleToggleChange('pinThreeActive', c)}
+                            />
+                        </div>
+                        <Input
+                            name="pinThree"
+                            value={formData.pinThree || ""}
+                            onChange={handleChange}
+                            placeholder="e.g. 9012"
+                            disabled={!formData.pinThreeActive}
+                            className="h-12 rounded-2xl border-gray-200 text-[#718EBF] disabled:opacity-50"
+                        />
                     </div>
                 </div>
             </div>

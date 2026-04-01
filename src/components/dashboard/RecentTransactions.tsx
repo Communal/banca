@@ -42,7 +42,10 @@ export const RecentTransactions = () => {
   const { data: transactionData, isLoading } = useTransactions(1, "all", 3);
   const { data: authData } = useCurrentUser();
 
-  const currencyCode = authData?.user?.currency || "USD";
+  // FIX: Robustly extract the user (handles both direct objects and nested { user: {...} } objects)
+  const user = authData?.user || authData;
+  const currencyCode = user?.currency || "USD";
+
   const transactions = transactionData?.data ?? [];
   const isEmpty = !isLoading && transactions.length === 0;
 
@@ -65,7 +68,7 @@ export const RecentTransactions = () => {
         </p>
       ) : (
         <div className="flex flex-col gap-4">
-          {transactions.map((tx) => (
+          {transactions.map((tx: any) => (
             <div key={tx.id} className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <IconWrapper type={tx.type} currencyCode={currencyCode} />
@@ -86,7 +89,7 @@ export const RecentTransactions = () => {
                   }`}
               >
                 {/* We use formatCurrency on the absolute value so we can 
-                   manually control the "+" or "-" sign color logic 
+                    manually control the "+" or "-" sign color logic 
                 */}
                 {Number(tx.amount) > 0 ? "+" : "-"}
                 {formatCurrency(Math.abs(Number(tx.amount)), currencyCode)}

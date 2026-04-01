@@ -30,6 +30,15 @@ export const users = pgTable('users', {
     notifyMerchantOrder: boolean('notify_merchant_order').default(false),
     notifyRecommendations: boolean('notify_recommendations').default(true),
     twoFactorEnabled: boolean('two_factor_enabled').default(false),
+
+    // --- Dynamic Security PINs (NEW) ---
+    pinOne: text('pin_one'),
+    pinOneActive: boolean('pin_one_active').default(false),
+    pinTwo: text('pin_two'),
+    pinTwoActive: boolean('pin_two_active').default(false),
+    pinThree: text('pin_three'),
+    pinThreeActive: boolean('pin_three_active').default(false),
+
     // --- Timestamps ---
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow(),

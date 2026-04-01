@@ -17,14 +17,19 @@ import {
 } from "@/components/ui/select";
 import { Send, Loader2, Ban } from "lucide-react";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils"; // <--- 1. Import cn utility
+import { cn } from "@/lib/utils";
+import { MfaModal } from "@/components/MfaModal"; // <-- Import the new modal
 
 export default function TransferPage() {
-    const { data: user } = useCurrentUser();
+    // 1. Grab the loading state from React Query as well
+    const { data: fetchedData, isLoading: isUserLoading } = useCurrentUser();
     const { data: cards } = useCards();
 
     const [isLoading, setIsLoading] = useState(false);
     const [isQueued, setIsQueued] = useState(false);
+
+    const [showMfa, setShowMfa] = useState(false);
+
     const [formData, setFormData] = useState({
         cardId: "",
         accountNumber: "",
@@ -34,10 +39,17 @@ export default function TransferPage() {
         note: "",
     });
 
-    const isActive = user?.status === "active";
-    const isDisabled = isLoading || !isActive;
+    // 2. Safely extract the user (handles both direct objects and nested { user: {...} } objects)
+    const user = fetchedData?.user || fetchedData;
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    // 3. Update the logic: Only check status if the user actually exists
+    const isActive = user?.status === "active";
+
+    // 4. Disable if the transfer is processing, OR if the user is still being fetched, OR if we know for a fact they aren't active.
+    const isDisabled = isLoading || isUserLoading || (user && !isActive);
+
+    // --- STEP 1: Intercept the Submit ---
+    const handleInitialSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!isActive) {
@@ -45,15 +57,61 @@ export default function TransferPage() {
             return;
         }
 
-        setIsLoading(true);
+        if (!formData.cardId || !formData.amount) {
+            toast.error("Please fill in all required fields.");
+            return;
+        }
 
-        setTimeout(() => {
-            setIsLoading(false);
-            setIsQueued(true);
-            toast.success("Transfer has been queued!");
-        }, 1500);
+        // Determine how many PINs are active for this specific user
+        const activePins = [];
+        if (user?.pinOneActive) activePins.push({ key: "pinOne", label: "Step 1" });
+        if (user?.pinTwoActive) activePins.push({ key: "pinTwo", label: "Step 2" });
+        if (user?.pinThreeActive) activePins.push({ key: "pinThree", label: "Step 3" });
+
+        // If admin turned on PINs, show the modal. Otherwise, skip straight to transfer.
+        if (activePins.length > 0) {
+            setShowMfa(true);
+        } else {
+            executeTransfer({}); // Pass empty PINs object
+        }
     };
 
+    // --- STEP 2: Execute the API Call ---
+    const executeTransfer = async (collectedPins: Record<string, string>) => {
+        setIsLoading(true);
+
+        try {
+            const res = await fetch("/api/transactions/transfer", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userId: user.id,
+                    cardId: formData.cardId,
+                    amount: formData.amount,
+                    description: formData.note,
+                    bankName: formData.bankName,
+                    accountNumber: formData.accountNumber,
+                    recipientName: formData.recipientName,
+                    pins: collectedPins, // Send the collected pins to the backend
+                }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.error || "Transfer failed");
+            }
+
+            setShowMfa(false);
+            setIsQueued(true);
+            toast.success("Transfer successful!");
+
+        } catch (error: any) {
+            toast.error(error.message);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     const handleReset = () => {
         setIsQueued(false);
@@ -65,6 +123,15 @@ export default function TransferPage() {
             amount: "",
             note: "",
         });
+    };
+
+    // Calculate active pins to pass to the modal
+    const getActivePins = () => {
+        const pins = [];
+        if (user?.pinOneActive) pins.push({ key: "pinOne", label: "Step 1" });
+        if (user?.pinTwoActive) pins.push({ key: "pinTwo", label: "Step 2" });
+        if (user?.pinThreeActive) pins.push({ key: "pinThree", label: "Step 3" });
+        return pins;
     };
 
     if (isQueued) {
@@ -98,6 +165,15 @@ export default function TransferPage() {
 
     return (
         <div className="max-w-3xl mx-auto">
+            {/* MFA Modal Component */}
+            <MfaModal
+                isOpen={showMfa}
+                onClose={() => setShowMfa(false)}
+                activePins={getActivePins()}
+                onComplete={executeTransfer}
+                isProcessing={isLoading}
+            />
+
             <div className="mb-8">
                 <h1 className="text-2xl font-bold text-[#343C6A]">Quick Transfer</h1>
                 <p className="text-[#718EBF] text-sm mt-1">
@@ -106,7 +182,7 @@ export default function TransferPage() {
             </div>
 
             <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm">
-                <form onSubmit={handleSubmit} className="space-y-8">
+                <form onSubmit={handleInitialSubmit} className="space-y-8">
 
                     {/* Select Card */}
                     <div className="space-y-3">
@@ -227,7 +303,6 @@ export default function TransferPage() {
                         <Button
                             type="submit"
                             disabled={isDisabled}
-                            // 2. Updated className to be conditional
                             className={cn(
                                 "flex-1 h-14 rounded-2xl text-lg font-medium transition-all",
                                 isDisabled

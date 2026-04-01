@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { UserProfileForm } from "@/components/admin/UserProfileForm"; // <--- Import the reusable form
+import { UserProfileForm } from "@/components/admin/UserProfileForm";
 
 export default function AddUserPage() {
   const router = useRouter();
@@ -11,7 +11,6 @@ export default function AddUserPage() {
 
   const createMutation = useMutation({
     mutationFn: async (newUser: any) => {
-      // API call to create user
       const res = await fetch("/api/admin/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -24,8 +23,11 @@ export default function AddUserPage() {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["admin-data"] });
+
+      queryClient.invalidateQueries({ queryKey: ["current-user"] });
+      queryClient.invalidateQueries({ queryKey: ["me"] });
+
       toast.success("User created successfully!");
-      // Redirect to the edit page of the new user to add cards/transactions
       router.push(`/admin/users/${data.userId}`);
     },
     onError: (error: Error) => {
@@ -42,11 +44,9 @@ export default function AddUserPage() {
         </p>
       </div>
 
-      {/* Reuse the form component */}
       <UserProfileForm
         onSubmit={(data) => createMutation.mutate(data)}
         isSaving={createMutation.isPending}
-        // Set defaults for creation mode
         initialData={{
           currency: 'USD',
           status: 'active',

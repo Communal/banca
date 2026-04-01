@@ -7,6 +7,7 @@ import { BalanceHistory } from "@/components/dashboard/BalanceHistory";
 import { useCards } from "@/hooks/useCards";
 import { CreditCard } from "@/components/dashboard/cards/CreditCard";
 import Link from "next/link";
+import { Send } from "lucide-react"; // Import an icon for the button
 
 // --- New Sub-Component for Dashboard ---
 const MyPrimaryCard = () => {
@@ -62,8 +63,18 @@ export default function DashboardPage() {
             <MyPrimaryCard />
           </div>
 
+
           {/* 2. Recent Transactions */}
           <RecentTransactions />
+
+          <Link
+            href="/dashboard/transfer"
+            className="w-full h-14 bg-[#1814F3] hover:bg-blue-700 text-white rounded-[1rem] flex items-center justify-center gap-2 font-medium text-lg shadow-lg shadow-blue-500/20 transition-all active:scale-[0.98]"
+          >
+            <Send size={20} className="-mt-1" />
+            Quick Transfer
+          </Link>
+
         </div>
 
         {/* --- Left Column (Charts) --- */}
