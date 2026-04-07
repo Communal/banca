@@ -57,7 +57,7 @@ export default function RootLayout({
         className={`${lexend.className} bg-brand-light antialiased overflow-x-hidden`}
       >
         {/* ✅ Load Google Translate ONCE globally */}
-        <GoogleTranslate />
+        {/* <GoogleTranslate /> */}
 
         <Providers>
           {children}

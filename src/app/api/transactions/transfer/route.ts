@@ -33,27 +33,32 @@ export async function POST(req: Request) {
         });
 
         if (!card) return NextResponse.json({ error: "Card not found" }, { status: 404 });
-        if (Number(card.balance) < Number(amount)) {
+
+        // Ensure amount is treated as a clean absolute number for math
+        const numericAmount = Math.abs(Number(amount));
+
+        if (Number(card.balance) < numericAmount) {
             return NextResponse.json({ error: "Insufficient funds" }, { status: 400 });
         }
 
         // 4. Calculate new balance
-        const newBalance = (Number(card.balance) - Number(amount)).toString();
+        const newBalance = (Number(card.balance) - numericAmount).toString();
 
-        // 5. Update Card Balance & Create Transaction (Ideally in a DB transaction, but keeping it simple based on your schema)
+        // 5. Update Card Balance
         await db.update(cards)
             .set({ balance: newBalance })
             .where(eq(cards.id, cardId));
 
         const displayId = `TXN-${uuidv4().substring(0, 8).toUpperCase()}`;
 
+        // 6. Create Transaction (Saved as a NEGATIVE amount!)
         await db.insert(transactions).values({
             cardId: cardId,
             description: description || `Transfer to ${accountNumber} at ${bankName}`,
             transactionIdDisplay: displayId,
             type: 'transfer',
             status: 'completed',
-            amount: amount,
+            amount: (-numericAmount).toString(), // <-- THE FIX IS HERE
             date: new Date(),
         });
 

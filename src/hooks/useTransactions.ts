@@ -41,3 +41,16 @@ export const useTransactions = (
         placeholderData: (previousData) => previousData,
     });
 };
+
+
+export const useTransactionDetails = (id: string) => {
+    return useQuery({
+        queryKey: ["transaction-details", id],
+        queryFn: async () => {
+            const res = await fetch(`/api/transactions/${id}`);
+            if (!res.ok) throw new Error("Failed to fetch transaction details");
+            return res.json();
+        },
+        enabled: !!id,
+    });
+};
